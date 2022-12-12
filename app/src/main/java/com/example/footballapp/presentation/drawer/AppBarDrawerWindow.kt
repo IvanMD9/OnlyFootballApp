@@ -12,7 +12,7 @@ fun AppBar(
 ) {
     TopAppBar(
         title = {
-            Text(text = "Football App")
+            Text(text = " Only Football")
         },
         backgroundColor = Color.White,
         contentColor = Color.Black,

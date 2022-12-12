@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.footballapp.domain.use_case.championship.TeamDetailUseCase
 import com.example.footballapp.presentation.chempinship.detail_team.StateTeamDetail
+import com.example.footballapp.utils.Const
 import com.example.footballapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -23,7 +24,7 @@ class TeamDetailLaLigaViewModel @Inject constructor(
     val state: State<StateTeamDetail> = _state
 
     init {
-        savedStateHandle.get<String>("detail_pd")?.let { detailId ->
+        savedStateHandle.get<String>(Const.LA_LIGA_DETAIL)?.let { detailId ->
             getTeamDetailInfo(detailId)
         }
     }

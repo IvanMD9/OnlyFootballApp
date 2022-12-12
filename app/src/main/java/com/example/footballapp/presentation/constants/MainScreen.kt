@@ -1,4 +1,4 @@
-package com.example.footballapp.presentation.chempinship
+package com.example.footballapp.presentation.constants
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -13,30 +13,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.footballapp.presentation.chempinship.detail_team.serie_a.TeamDetailSerieAWindow
-import com.example.footballapp.presentation.chempinship.matches.serie_a.MatchesScreenSerieA
-import com.example.footballapp.presentation.chempinship.navigation.NavigationScreen
-import com.example.footballapp.presentation.chempinship.scores.serie_a.ScoresSerieAScreen
 import com.example.footballapp.presentation.chempinship.standing.ItemTabView
 import com.example.footballapp.presentation.chempinship.standing.components.TabViewInfo
-import com.example.footballapp.presentation.chempinship.standing.serie_a.StandingsSerieAInfoViewModel
-import com.example.footballapp.presentation.chempinship.standing.serie_a.StandingsSerieAScreen
-import com.example.footballapp.presentation.chempinship.team_matches.serie_a.TeamMatchesSerieAWindow
-import com.example.footballapp.presentation.chempinship.teams.serie_a.TeamsSerieAWindow
-import com.example.footballapp.presentation.constants.ScreenSection
-import com.example.footballapp.utils.Const
 
+
+// Реализовать позже, много шаблонного кода
 @ExperimentalFoundationApi
 @Composable
-fun MainWindowSerieA(
-    viewModel: StandingsSerieAInfoViewModel = hiltViewModel()
+fun MainWindow(
+    imageEmblem: String,
+    nameChampionship: String,
+    startDate: String,
+    endDate: String,
+    standingTournament: @Composable () -> Unit,
+    scoresTournament: @Composable () -> Unit,
+    teamsTournament: @Composable () -> Unit,
+    teamDetailTournament: @Composable () -> Unit,
+    teamMatchesTournament: @Composable () -> Unit,
+    matchesTournament: @Composable () -> Unit,
 ) {
-    val stateMain = viewModel.state.value
     var selectedTabIndex by remember {
         mutableStateOf(0)
     }
@@ -56,14 +53,14 @@ fun MainWindowSerieA(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Image(
-                            painter = rememberAsyncImagePainter(model = stateMain.standingsInfo?.competition?.emblem),
+                            painter = rememberAsyncImagePainter(model = imageEmblem),
                             contentDescription = null,
                             modifier = Modifier
                                 .size(30.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "${stateMain.standingsInfo?.competition?.name}",
+                            text = nameChampionship,
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color.Black
@@ -74,8 +71,8 @@ fun MainWindowSerieA(
                         horizontalArrangement = Arrangement.End
                     ) {
                         Text(
-                            text = "Сезон: ${stateMain.standingsInfo?.season?.startDate?.take(4)}" +
-                                    "/${stateMain.standingsInfo?.season?.endDate?.take(4)}",
+                            text = "Сезон: ${startDate.take(4)}" +
+                                    "/${endDate.take(4)}",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color.Black
@@ -103,26 +100,17 @@ fun MainWindowSerieA(
                 selectedTabIndex = it
             }
             when (selectedTabIndex) {
-                0 -> ScreenSection { StandingsSerieAScreen() }
-                1 -> ScreenSection { ScoresSerieAScreen() }
+                0 -> ScreenSection { standingTournament() }
+                1 -> ScreenSection { scoresTournament() }
                 2 -> ScreenSection {
                     val navController = rememberNavController()
-                    NavHost(
-                        navController = navController,
-                        startDestination = NavigationScreen.TeamsScreen.route
-                    ) {
-                        composable(route = NavigationScreen.TeamsScreen.route) {
-                            TeamsSerieAWindow(navController = navController)
-                        }
-                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{${Const.SERIE_A_DETAIL}}") {
-                            TeamDetailSerieAWindow(navController = navController)
-                        }
-                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{${Const.SERIE_A_TEAM_MATCHES}}") {
-                            TeamMatchesSerieAWindow()
-                        }
-                    }
+                    NavGraphForMainScreen(
+                        navHostController = navController,
+                        teamsTournament = { teamsTournament() },
+                        teamDetailTournament = { teamDetailTournament() },
+                        teamMatchesTournament = { teamMatchesTournament() })
                 }
-                3 -> ScreenSection { MatchesScreenSerieA() }
+                3 -> ScreenSection { matchesTournament() }
             }
         }
     }

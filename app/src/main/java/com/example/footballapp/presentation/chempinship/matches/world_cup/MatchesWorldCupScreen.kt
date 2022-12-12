@@ -27,16 +27,15 @@ fun MatchesScreenWorldCup(
     val state = viewModel.state.value
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(bottom = 10.dp),
+        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         val groupedStage = state.matchesInfo?.matches?.groupBy { it.stage }
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(6.dp)
+            verticalArrangement = Arrangement.spacedBy(6.dp),
+            contentPadding = PaddingValues(bottom = 8.dp)
         ) {
             groupedStage?.forEach { (stage, matches) ->
                 stickyHeader {

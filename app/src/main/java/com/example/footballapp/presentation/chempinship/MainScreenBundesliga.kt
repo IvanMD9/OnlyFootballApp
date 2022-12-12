@@ -19,16 +19,23 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.footballapp.presentation.chempinship.detail_team.bundesliga.TeamDetailBundesligaWindow
+import com.example.footballapp.presentation.chempinship.detail_team.eredivisie.TeamDetailEredivisieWindow
 import com.example.footballapp.presentation.chempinship.matches.bundesliga.MatchesScreenBundesliga
+import com.example.footballapp.presentation.chempinship.matches.eredivisie.MatchesScreenEredivisie
 import com.example.footballapp.presentation.chempinship.navigation.NavigationScreen
 import com.example.footballapp.presentation.chempinship.scores.bundesliga.ScoresBundesligaScreen
+import com.example.footballapp.presentation.chempinship.scores.eredivisie.ScoresEredivisieScreen
 import com.example.footballapp.presentation.chempinship.standing.ItemTabView
 import com.example.footballapp.presentation.chempinship.standing.bundesliga.StandingsBundesligaInfoViewModel
 import com.example.footballapp.presentation.chempinship.standing.bundesliga.StandingsBundesligaScreen
 import com.example.footballapp.presentation.chempinship.standing.components.TabViewInfo
+import com.example.footballapp.presentation.chempinship.standing.eredivisie.StandingsEredivisieScreen
 import com.example.footballapp.presentation.chempinship.team_matches.bundesliga.TeamMatchesBundesligaWindow
+import com.example.footballapp.presentation.chempinship.team_matches.eredivisie.TeamMatchesEredivisieWindow
 import com.example.footballapp.presentation.chempinship.teams.budesliga.TeamsBundesligaWindow
+import com.example.footballapp.presentation.chempinship.teams.eredivisie.TeamsEredivisieWindow
 import com.example.footballapp.presentation.constants.ScreenSection
+import com.example.footballapp.utils.Const
 
 @ExperimentalFoundationApi
 @Composable
@@ -113,10 +120,10 @@ fun MainWindowBundesliga(
                         composable(route = NavigationScreen.TeamsScreen.route) {
                             TeamsBundesligaWindow(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{detail_bl1}") {
+                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{${Const.BUNDESLIGA_DETAIL}}") {
                             TeamDetailBundesligaWindow(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{team_matches_bl1}") {
+                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{${Const.BUNDESLIGA_TEAM_MATCHES}}") {
                             TeamMatchesBundesligaWindow()
                         }
                     }

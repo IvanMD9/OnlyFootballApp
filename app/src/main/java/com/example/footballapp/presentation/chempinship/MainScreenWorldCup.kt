@@ -29,6 +29,7 @@ import com.example.footballapp.presentation.chempinship.standing.world_cup.Stand
 import com.example.footballapp.presentation.chempinship.team_matches.world_cup.TeamMatchesWorldCupWindow
 import com.example.footballapp.presentation.chempinship.teams.world_cup.TeamsWorldCupWindow
 import com.example.footballapp.presentation.constants.ScreenSection
+import com.example.footballapp.utils.Const
 
 @ExperimentalFoundationApi
 @Composable
@@ -112,10 +113,10 @@ fun MainWindowWorldCup(
                         composable(route = NavigationScreen.TeamsScreen.route) {
                             TeamsWorldCupWindow(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{detail_wc}") {
+                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{${Const.WC_DETAIL}}") {
                             TeamDetailWorldCupWindow(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{team_matches_wc}") {
+                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{${Const.WC_TEAM_MATCHES}}") {
                             TeamMatchesWorldCupWindow()
                         }
                     }

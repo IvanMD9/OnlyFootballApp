@@ -17,6 +17,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.footballapp.data.model.chempionship.matches.Matches
+import com.example.footballapp.presentation.constants.ItemResultMatch
 
 @Composable
 fun ItemMatch(
@@ -40,7 +41,11 @@ fun ItemMatch(
             ItemClub(image = match.homeTeam.crest, name = match.homeTeam.shortName)
             ItemResultMatch(
                 goalHome = match.score.fullTime.home,
-                goalAway = match.score.fullTime.away
+                goalAway = match.score.fullTime.away,
+                goalHomeRegular = match.score.regularTime?.home?.plus(match.score.extraTime.home),
+                goalAwayRegular = match.score.regularTime?.away?.plus(match.score.extraTime.away),
+                goalHomePen = match.score.penalties?.home,
+                goalAwayPen = match.score.penalties?.away,
             )
             ItemClub(image = match.awayTeam.crest, name = match.awayTeam.shortName)
         }
@@ -76,39 +81,6 @@ private fun ItemClub(
             fontWeight = FontWeight.Medium,
             color = Color.Black,
             maxLines = 1
-        )
-    }
-}
-
-@Composable
-private fun ItemResultMatch(
-    goalHome: Int,
-    goalAway: Int
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
-        modifier = Modifier.wrapContentWidth()
-    ) {
-        Text(
-            text = goalHome.toString(),
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            text = " - ",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            text = goalAway.toString(),
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
         )
     }
 }

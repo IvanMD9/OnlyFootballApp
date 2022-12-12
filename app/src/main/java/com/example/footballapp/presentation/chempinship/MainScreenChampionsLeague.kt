@@ -29,6 +29,7 @@ import com.example.footballapp.presentation.chempinship.standing.components.TabV
 import com.example.footballapp.presentation.chempinship.team_matches.champions_league.TeamMatchesChampionsLeagueWindow
 import com.example.footballapp.presentation.chempinship.teams.champions_league.TeamsChampionsLeagueWindow
 import com.example.footballapp.presentation.constants.ScreenSection
+import com.example.footballapp.utils.Const
 
 @ExperimentalFoundationApi
 @Composable
@@ -113,10 +114,10 @@ fun MainWindowChampionsLeague(
                         composable(route = NavigationScreen.TeamsScreen.route) {
                             TeamsChampionsLeagueWindow(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{detail_cl}") {
+                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{${Const.CHAMPIONS_DETAIL}}") {
                             TeamDetailChampionsLeagueWindow(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{team_matches_cl}") {
+                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{${Const.CHAMPIONS_TEAM_MATCHES}}") {
                             TeamMatchesChampionsLeagueWindow()
                         }
                     }

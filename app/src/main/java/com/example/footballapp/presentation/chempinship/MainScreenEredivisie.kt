@@ -29,6 +29,7 @@ import com.example.footballapp.presentation.chempinship.standing.eredivisie.Stan
 import com.example.footballapp.presentation.chempinship.team_matches.eredivisie.TeamMatchesEredivisieWindow
 import com.example.footballapp.presentation.chempinship.teams.eredivisie.TeamsEredivisieWindow
 import com.example.footballapp.presentation.constants.ScreenSection
+import com.example.footballapp.utils.Const
 
 @ExperimentalFoundationApi
 @Composable
@@ -113,10 +114,10 @@ fun MainWindowEredivisie(
                         composable(route = NavigationScreen.TeamsScreen.route) {
                             TeamsEredivisieWindow(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{detail_ded}") {
+                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{${Const.EREDIVISIE_DETAIL}}") {
                             TeamDetailEredivisieWindow(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{team_matches_ded}") {
+                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{${Const.EREDIVISIE_TEAM_MATCHES}}") {
                             TeamMatchesEredivisieWindow()
                         }
                     }

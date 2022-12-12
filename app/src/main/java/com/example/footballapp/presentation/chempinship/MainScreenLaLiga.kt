@@ -29,6 +29,7 @@ import com.example.footballapp.presentation.chempinship.standing.la_liga.Standin
 import com.example.footballapp.presentation.chempinship.team_matches.la_liga.TeamMatchesLaLigaWindow
 import com.example.footballapp.presentation.chempinship.teams.la_liga.TeamsLaLigaWindow
 import com.example.footballapp.presentation.constants.ScreenSection
+import com.example.footballapp.utils.Const
 
 @ExperimentalFoundationApi
 @Composable
@@ -113,10 +114,10 @@ fun MainWindowLaLiga(
                         composable(route = NavigationScreen.TeamsScreen.route) {
                             TeamsLaLigaWindow(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{detail_pd}") {
+                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{${Const.LA_LIGA_DETAIL}}") {
                             TeamDetailLaLigaWindow(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{team_matches_pd}") {
+                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{${Const.LA_LIGA_TEAM_MATCHES}}") {
                             TeamMatchesLaLigaWindow()
                         }
                     }

@@ -29,6 +29,7 @@ import com.example.footballapp.presentation.chempinship.standing.premier_league.
 import com.example.footballapp.presentation.chempinship.team_matches.premier_league.TeamMatchesPremierLeagueWindow
 import com.example.footballapp.presentation.chempinship.teams.premier_league.TeamsPremierLeagueWindow
 import com.example.footballapp.presentation.constants.ScreenSection
+import com.example.footballapp.utils.Const
 
 @ExperimentalFoundationApi
 @Composable
@@ -114,10 +115,10 @@ fun MainWindowPremierLeague(
                         composable(route = NavigationScreen.TeamsScreen.route) {
                             TeamsPremierLeagueWindow(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{detail_pl}") {
+                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{${Const.PREMIER_LEAGUE_DETAIL}}") {
                             TeamDetailPremierLeagueWindow(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{team_matches_pl}") {
+                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{${Const.PREMIER_LEAGUE_TEAM_MATCHES}}") {
                             TeamMatchesPremierLeagueWindow()
                         }
                     }

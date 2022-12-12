@@ -29,6 +29,7 @@ import com.example.footballapp.presentation.chempinship.standing.ligue_1.Standin
 import com.example.footballapp.presentation.chempinship.team_matches.ligue_1.TeamMatchesLigue1Window
 import com.example.footballapp.presentation.chempinship.teams.ligue_1.TeamsLigue1Window
 import com.example.footballapp.presentation.constants.ScreenSection
+import com.example.footballapp.utils.Const
 
 @ExperimentalFoundationApi
 @Composable
@@ -113,10 +114,10 @@ fun MainWindowLigue1(
                         composable(route = NavigationScreen.TeamsScreen.route) {
                             TeamsLigue1Window(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{detail_fl1}") {
+                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{${Const.LIGUE_1_DETAIL}}") {
                             TeamDetailLigue1Window(navController = navController)
                         }
-                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{team_matches_fl1}") {
+                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{${Const.LIGUE_1_TEAM_MATCHES}}") {
                             TeamMatchesLigue1Window()
                         }
                     }

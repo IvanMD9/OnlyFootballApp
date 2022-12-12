@@ -1,7 +1,6 @@
 package com.example.footballapp.presentation.chempinship.team_matches.components
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,8 +17,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
-import coil.size.Size
 import com.example.footballapp.data.model.chempionship.matches_team.Matches
+import com.example.footballapp.presentation.constants.ItemResultMatch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -67,7 +66,11 @@ fun ItemTeamMatches(
                 ItemClub(image = teamMatches.homeTeam.crest, name = teamMatches.homeTeam.shortName)
                 ItemResultMatch(
                     goalHome = teamMatches.score.fullTime.home,
-                    goalAway = teamMatches.score.fullTime.away
+                    goalAway = teamMatches.score.fullTime.away,
+                    goalHomeRegular = teamMatches.score.regularTime?.home?.plus(teamMatches.score.extraTime.home),
+                    goalAwayRegular = teamMatches.score.regularTime?.away?.plus(teamMatches.score.extraTime.away),
+                    goalHomePen = teamMatches.score.penalties?.home,
+                    goalAwayPen = teamMatches.score.penalties?.away,
                 )
                 ItemClub(image = teamMatches.awayTeam.crest, name = teamMatches.awayTeam.shortName)
             }
@@ -97,39 +100,6 @@ private fun ItemClub(
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(text = name, fontSize = 16.sp, fontWeight = FontWeight.Medium, color = Color.Black)
-    }
-}
-
-@Composable
-private fun ItemResultMatch(
-    goalHome: Int,
-    goalAway: Int
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
-        modifier = Modifier.wrapContentWidth()
-    ) {
-        Text(
-            text = goalHome.toString(),
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            text = " - ",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            text = goalAway.toString(),
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
-        )
     }
 }
 
