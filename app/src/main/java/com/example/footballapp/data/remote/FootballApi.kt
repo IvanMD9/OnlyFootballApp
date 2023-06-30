@@ -6,9 +6,7 @@ import com.example.footballapp.data.model.chempionship.matches_team.TeamMatchesM
 import com.example.footballapp.data.model.chempionship.scores.ScoresModel
 import com.example.footballapp.data.model.chempionship.standing.StandingsModel
 import com.example.footballapp.data.model.chempionship.teams.TeamsModel
-import com.example.footballapp.data.model.europe.EuropeStandingModel
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Path
 
 interface FootballApi {
@@ -21,7 +19,7 @@ interface FootballApi {
     @GET("competitions/{europe}/standings")
     suspend fun standingsEuropeInfo(
         @Path("europe") europe : String
-    ) : EuropeStandingModel
+    ) : StandingsModel
 
     @GET("competitions/{scores}/scorers")
     suspend fun scoresInfo(

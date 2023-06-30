@@ -36,7 +36,7 @@ import com.example.footballapp.utils.Const
 fun MainWindowChampionsLeague(
     viewModel: StandingChampionsViewModel = hiltViewModel()
 ) {
-    val stateMain = viewModel.state.value
+    val stateMain = viewModel.state.collectAsState()
     var selectedTabIndex by remember {
         mutableStateOf(0)
     }
@@ -56,14 +56,14 @@ fun MainWindowChampionsLeague(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Image(
-                            painter = rememberAsyncImagePainter(model = stateMain.europeStanding?.competition?.emblem),
+                            painter = rememberAsyncImagePainter(model = stateMain.value.data?.competition?.emblem),
                             contentDescription = null,
                             modifier = Modifier
                                 .size(30.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "${stateMain.europeStanding?.competition?.name}",
+                            text = "${stateMain.value.data?.competition?.name}",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color.Black
@@ -74,8 +74,8 @@ fun MainWindowChampionsLeague(
                         horizontalArrangement = Arrangement.End
                     ) {
                         Text(
-                            text = "Сезон: ${stateMain.europeStanding?.season?.startDate?.take(4)}" +
-                                    "/${stateMain.europeStanding?.season?.endDate?.take(4)}",
+                            text = "Сезон: ${stateMain.value.data?.season?.startDate?.take(4)}" +
+                                    "/${stateMain.value.data?.season?.endDate?.take(4)}",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color.Black

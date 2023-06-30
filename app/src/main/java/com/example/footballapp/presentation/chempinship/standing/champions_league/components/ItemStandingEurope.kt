@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
-import com.example.footballapp.data.model.europe.Table
+import com.example.footballapp.data.model.chempionship.standing.Table
 import com.example.footballapp.presentation.constants.StatisticsItemTextStanding
 
 @Composable

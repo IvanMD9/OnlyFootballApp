@@ -9,6 +9,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,12 +25,12 @@ import com.example.footballapp.presentation.constants.HeaderStatisticsStanding
 fun StandingLaLiagScreen(
     viewModel: StandingsLaLigaInfoViewModel = hiltViewModel()
 ) {
-    val state = viewModel.state.value
+    val state = viewModel.state.collectAsState()
 
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        val grouped = state.standingsInfo?.standings?.groupBy { it.type }
+        val grouped = state.value.data?.standings?.groupBy { it.type }
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -63,7 +64,7 @@ fun StandingLaLiagScreen(
                 }
             }
         }
-        if (state.isLoading) {
+        if (state.value.isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier.align(Alignment.Center),
                 color = Color.Black

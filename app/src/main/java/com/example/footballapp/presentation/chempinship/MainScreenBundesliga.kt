@@ -19,21 +19,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.footballapp.presentation.chempinship.detail_team.bundesliga.TeamDetailBundesligaWindow
-import com.example.footballapp.presentation.chempinship.detail_team.eredivisie.TeamDetailEredivisieWindow
 import com.example.footballapp.presentation.chempinship.matches.bundesliga.MatchesScreenBundesliga
-import com.example.footballapp.presentation.chempinship.matches.eredivisie.MatchesScreenEredivisie
 import com.example.footballapp.presentation.chempinship.navigation.NavigationScreen
 import com.example.footballapp.presentation.chempinship.scores.bundesliga.ScoresBundesligaScreen
-import com.example.footballapp.presentation.chempinship.scores.eredivisie.ScoresEredivisieScreen
 import com.example.footballapp.presentation.chempinship.standing.ItemTabView
 import com.example.footballapp.presentation.chempinship.standing.bundesliga.StandingsBundesligaInfoViewModel
 import com.example.footballapp.presentation.chempinship.standing.bundesliga.StandingsBundesligaScreen
 import com.example.footballapp.presentation.chempinship.standing.components.TabViewInfo
-import com.example.footballapp.presentation.chempinship.standing.eredivisie.StandingsEredivisieScreen
 import com.example.footballapp.presentation.chempinship.team_matches.bundesliga.TeamMatchesBundesligaWindow
-import com.example.footballapp.presentation.chempinship.team_matches.eredivisie.TeamMatchesEredivisieWindow
 import com.example.footballapp.presentation.chempinship.teams.budesliga.TeamsBundesligaWindow
-import com.example.footballapp.presentation.chempinship.teams.eredivisie.TeamsEredivisieWindow
 import com.example.footballapp.presentation.constants.ScreenSection
 import com.example.footballapp.utils.Const
 
@@ -42,7 +36,7 @@ import com.example.footballapp.utils.Const
 fun MainWindowBundesliga(
     viewModel: StandingsBundesligaInfoViewModel = hiltViewModel()
 ) {
-    val stateMain = viewModel.state.value
+    val stateMain = viewModel.state.collectAsState()
     var selectedTabIndex by remember {
         mutableStateOf(0)
     }
@@ -62,14 +56,14 @@ fun MainWindowBundesliga(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Image(
-                            painter = rememberAsyncImagePainter(model = stateMain.standingsInfo?.competition?.emblem),
+                            painter = rememberAsyncImagePainter(model = stateMain.value.data?.competition?.emblem),
                             contentDescription = null,
                             modifier = Modifier
                                 .size(30.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "${stateMain.standingsInfo?.competition?.name}",
+                            text = "${stateMain.value.data?.competition?.name}",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color.Black
@@ -80,8 +74,8 @@ fun MainWindowBundesliga(
                         horizontalArrangement = Arrangement.End
                     ) {
                         Text(
-                            text = "Сезон: ${stateMain.standingsInfo?.season?.startDate?.take(4)}" +
-                                    "/${stateMain.standingsInfo?.season?.endDate?.take(4)}",
+                            text = "Сезон: ${stateMain.value.data?.season?.startDate?.take(4)}" +
+                                    "/${stateMain.value.data?.season?.endDate?.take(4)}",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color.Black

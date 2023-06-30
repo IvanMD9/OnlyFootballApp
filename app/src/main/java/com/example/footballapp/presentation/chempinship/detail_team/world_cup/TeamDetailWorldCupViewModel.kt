@@ -1,47 +1,29 @@
 package com.example.footballapp.presentation.chempinship.detail_team.world_cup
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.example.footballapp.data.model.chempionship.detail_team.TeamDetailModel
+import com.example.footballapp.domain.repository.RepositoryChampionshipFootball
 import com.example.footballapp.domain.use_case.championship.TeamDetailUseCase
-import com.example.footballapp.presentation.chempinship.detail_team.StateTeamDetail
 import com.example.footballapp.utils.Const
-import com.example.footballapp.utils.Resource
+import com.example.footballapp.utils.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
 class TeamDetailWorldCupViewModel @Inject constructor(
-    private val teamDetailBLUseCase: TeamDetailUseCase,
+    repositoryFootball: RepositoryChampionshipFootball,
     savedStateHandle: SavedStateHandle
-) : ViewModel() {
-
-    private val _state = mutableStateOf(StateTeamDetail())
-    val state: State<StateTeamDetail> = _state
+) : BaseViewModel<TeamDetailModel>(
+    useCase = TeamDetailUseCase(repositoryFootball = repositoryFootball)
+) {
 
     init {
         savedStateHandle.get<String>(Const.WC_DETAIL)?.let { detailId ->
-            getTeamDetailInfo(detailId)
+            baseMethod(detailId)
         }
     }
 
-    private fun getTeamDetailInfo(detail: String) {
-        teamDetailBLUseCase.invoke(detail).onEach { result ->
-            when (result) {
-                is Resource.Loading -> {
-                    _state.value = StateTeamDetail(isLoading = true)
-                }
-                is Resource.Success -> {
-                    _state.value = StateTeamDetail(teamDetailInfo = result.data)
-                }
-                is Resource.Error -> {
-                    _state.value = StateTeamDetail(error = result.message ?: "An unexpected error")
-                }
-            }
-        }.launchIn(viewModelScope)
+    override fun baseMethod(key: String) {
+        super.baseMethod(key)
     }
 }

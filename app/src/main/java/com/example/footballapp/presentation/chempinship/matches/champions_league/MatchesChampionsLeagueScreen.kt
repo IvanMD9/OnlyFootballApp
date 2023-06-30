@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,7 +25,7 @@ fun MatchesScreenChampionsLeague(
     viewModel: MatchesChampionsLeagueInfoViewModel = hiltViewModel()
 ) {
 
-    val state = viewModel.state.value
+    val state = viewModel.state.collectAsState()
 
     Box(
         modifier = Modifier
@@ -32,7 +33,7 @@ fun MatchesScreenChampionsLeague(
             .padding(bottom = 10.dp),
         contentAlignment = Alignment.Center
     ) {
-        val groupedStage = state.matchesInfo?.matches?.groupBy { it.stage }
+        val groupedStage = state.value.data?.matches?.groupBy { it.stage }
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -57,7 +58,7 @@ fun MatchesScreenChampionsLeague(
                 }
             }
         }
-        if (state.isLoading) {
+        if (state.value.isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier.align(Alignment.Center),
                 color = Color.Black
