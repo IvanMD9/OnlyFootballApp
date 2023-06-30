@@ -5,7 +5,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.footballapp.presentation.chempinship.navigation.NavigationScreen
-
 @Composable
 fun NavGraphForMainScreen(
     navHostController: NavHostController,

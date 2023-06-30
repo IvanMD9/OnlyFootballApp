@@ -1,6 +1,7 @@
 package com.example.footballapp.di
 
 import com.example.footballapp.data.remote.FootballApi
+import com.example.footballapp.data.remote.SupportInterceptor
 import com.example.footballapp.data.repository.RepositoryChampionshipFootballImpl
 import com.example.footballapp.data.repository.RepositoryEuropeFootballImpl
 import com.example.footballapp.domain.repository.RepositoryChampionshipFootball
@@ -13,8 +14,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -29,10 +28,15 @@ object AppModule {
         val client : OkHttpClient.Builder = OkHttpClient.Builder()
         client.addInterceptor(logger)
 
+        val builder = OkHttpClient.Builder()
+            .addInterceptor(SupportInterceptor())
+            .build()
+
         return Retrofit.Builder()
             .baseUrl(FootballApi.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client.build())
+            .client(builder)
             .build()
             .create(FootballApi::class.java)
     }
