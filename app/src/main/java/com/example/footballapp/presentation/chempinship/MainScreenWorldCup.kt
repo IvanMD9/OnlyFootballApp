@@ -36,7 +36,7 @@ import com.example.footballapp.utils.Const
 fun MainWindowWorldCup(
     viewModel: StandingWorldCupViewModel = hiltViewModel()
 ) {
-    val stateMain = viewModel.state.value
+    val stateMain = viewModel.state.collectAsState()
     var selectedTabIndex by remember {
         mutableStateOf(0)
     }
@@ -56,14 +56,14 @@ fun MainWindowWorldCup(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Image(
-                            painter = rememberAsyncImagePainter(model = stateMain.europeStanding?.competition?.emblem),
+                            painter = rememberAsyncImagePainter(model = stateMain.value.data?.competition?.emblem),
                             contentDescription = null,
                             modifier = Modifier
                                 .size(30.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "${stateMain.europeStanding?.competition?.name}",
+                            text = "${stateMain.value.data?.competition?.name}",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color.Black
@@ -74,7 +74,7 @@ fun MainWindowWorldCup(
                         horizontalArrangement = Arrangement.End
                     ) {
                         Text(
-                            text = "${stateMain.europeStanding?.season?.startDate?.take(4)}",
+                            text = "${stateMain.value.data?.season?.startDate?.take(4)}",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color.Black

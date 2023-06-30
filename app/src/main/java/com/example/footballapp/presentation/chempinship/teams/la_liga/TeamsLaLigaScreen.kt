@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,7 +24,7 @@ fun TeamsLaLigaWindow(
     viewModel: TeamsLaLigaInfoViewModel = hiltViewModel(),
     navController: NavController
 ) {
-    val state = viewModel.state.value
+    val state = viewModel.state.collectAsState()
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -33,7 +34,7 @@ fun TeamsLaLigaWindow(
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             modifier = Modifier.padding(horizontal = 6.dp)
         ) {
-            state.teamsInfo?.let {
+            state.value.data?.let {
                 items(it.teams) { result ->
                     ItemTeamInfo(team = result, onClickDetailTeam = {
                         navController.navigate(NavigationScreen.TeamDetailScreen.route + "/${result.id}")
@@ -41,7 +42,7 @@ fun TeamsLaLigaWindow(
                 }
             }
         }
-        if (state.isLoading) {
+        if (state.value.isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier.align(Alignment.Center),
                 color = Color.Black

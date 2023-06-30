@@ -9,6 +9,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,10 +26,10 @@ import com.example.footballapp.presentation.constants.HeaderStatisticsStanding
 fun StandingWorldCupWindow(
     viewModel: StandingWorldCupViewModel = hiltViewModel()
 ) {
-    val stateChampions = viewModel.state.value
+    val stateChampions = viewModel.state.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        val grouped = stateChampions.europeStanding?.standings?.groupBy { it.group }
+        val grouped = stateChampions.value.data?.standings?.groupBy { it.group }
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -37,7 +38,7 @@ fun StandingWorldCupWindow(
             grouped?.forEach { (group, clubList) ->
                 stickyHeader {
                     Text(
-                        text = group,
+                        text = "$group",
                         color = Color.Black,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
@@ -63,7 +64,7 @@ fun StandingWorldCupWindow(
                 }
             }
         }
-        if (stateChampions.isLoading) {
+        if (stateChampions.value.isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier.align(Alignment.Center),
                 color = Color.Black

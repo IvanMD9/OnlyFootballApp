@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,14 +29,14 @@ fun TeamDetailPrimeiraLigaWindow(
     viewModel: TeamDetailPrimeiraViewModel = hiltViewModel(),
     navController: NavController
 ) {
-    val state = viewModel.state.value
+    val state = viewModel.state.collectAsState()
 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(start = 20.dp, end = 20.dp, top = 16.dp)
     ) {
-        state.teamDetailInfo?.let { detail ->
+        state.value.data?.let { detail ->
             item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),

@@ -1,42 +1,24 @@
 package com.example.footballapp.presentation.chempinship.scores.bundesliga
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.example.footballapp.data.model.chempionship.scores.ScoresModel
+import com.example.footballapp.domain.repository.RepositoryChampionshipFootball
 import com.example.footballapp.domain.use_case.championship.ScoresUseCase
-import com.example.footballapp.presentation.chempinship.scores.StateScores
-import com.example.footballapp.utils.Resource
+import com.example.footballapp.utils.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
 class ScoresBundesligaInfoViewModel @Inject constructor(
-    private val scoresBLUseCase: ScoresUseCase
-) : ViewModel() {
-
-    private val _state = mutableStateOf(StateScores())
-    val state: State<StateScores> = _state
+    repositoryFootball: RepositoryChampionshipFootball
+) : BaseViewModel<ScoresModel>(
+    useCase = ScoresUseCase(repositoryFootball = repositoryFootball)
+) {
 
     init {
-        getScoresInfo("BL1")
+        baseMethod(key = "BL1")
     }
 
-    private fun getScoresInfo(scores : String) {
-        scoresBLUseCase.invoke(scores).onEach { result ->
-            when (result) {
-                is Resource.Loading -> {
-                    _state.value = StateScores(isLoading = true)
-                }
-                is Resource.Success -> {
-                    _state.value = StateScores(scoresInfo = result.data)
-                }
-                is Resource.Error -> {
-                    _state.value = StateScores(error = result.message ?: "An unexpected error")
-                }
-            }
-        }.launchIn(viewModelScope)
+    override fun baseMethod(key: String) {
+        super.baseMethod(key)
     }
 }

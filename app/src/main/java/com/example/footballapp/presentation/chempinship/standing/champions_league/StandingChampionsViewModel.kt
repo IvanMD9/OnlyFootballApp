@@ -1,42 +1,24 @@
 package com.example.footballapp.presentation.chempinship.standing.champions_league
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.footballapp.domain.use_case.europe.StandingsEuropeUseCase
-import com.example.footballapp.presentation.chempinship.standing.StateEuropeStanding
-import com.example.footballapp.utils.Resource
+import com.example.footballapp.data.model.chempionship.standing.StandingsModel
+import com.example.footballapp.domain.repository.RepositoryChampionshipFootball
+import com.example.footballapp.domain.use_case.championship.StandingsUseCase
+import com.example.footballapp.utils.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
 class StandingChampionsViewModel @Inject constructor(
-    private val standingsEuropeUseCase: StandingsEuropeUseCase
-) : ViewModel() {
-
-    private val _state = mutableStateOf(StateEuropeStanding())
-    val state: State<StateEuropeStanding> = _state
+    repositoryFootball: RepositoryChampionshipFootball
+) : BaseViewModel<StandingsModel>(
+    useCase = StandingsUseCase(repositoryFootball = repositoryFootball)
+) {
 
     init {
-        getStandingsInfo("CL")
+        baseMethod(key = "CL")
     }
 
-    private fun getStandingsInfo(europe: String) {
-        standingsEuropeUseCase.invoke(europe).onEach { result ->
-            when (result) {
-                is Resource.Loading -> {
-                    _state.value = StateEuropeStanding(isLoading = true)
-                }
-                is Resource.Success -> {
-                    _state.value = StateEuropeStanding(europeStanding = result.data)
-                }
-                is Resource.Error -> {
-                    _state.value = StateEuropeStanding(error = result.message ?: "An unexpected error")
-                }
-            }
-        }.launchIn(viewModelScope)
+    override fun baseMethod(key: String) {
+        super.baseMethod(key)
     }
 }
