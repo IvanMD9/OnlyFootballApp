@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Grid-->
+    <dimen name="default_padding">8dp</dimen>
+
+    <dimen name="horizontal_padding_smallest">4dp</dimen>
+    <dimen name="horizontal_padding_small">8dp</dimen>
+    <dimen name="horizontal_padding_medium">16dp</dimen>
+    <dimen name="horizontal_padding_large">20dp</dimen>
+
+    <dimen name="vertical_padding_smallest">4dp</dimen>
+    <dimen name="vertical_padding_small">8dp</dimen>
+    <dimen name="vertical_padding_medium">16dp</dimen>
+    <dimen name="vertical_padding_large">20dp</dimen>
+
+    <!--Icon-->
+    <dimen name="icon_size_medium">40dp</dimen>
+
+    <!--Text-->
+    <dimen name="text_smallest_size">12sp</dimen>
+    <dimen name="text_small_size">14sp</dimen>
+    <dimen name="text_large_size">24sp</dimen>
+    <dimen name="text_medium_size">17sp</dimen>
+    <dimen name="text_very_large_size">30sp</dimen>
+
+</resources>

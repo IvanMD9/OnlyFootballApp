@@ -1,4 +1,4 @@
-package com.example.footballapp.presentation.chempinship.detail_team.champions_league
+package com.example.footballapp.presentation.chempinship.detail_team.primeira
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -7,10 +7,10 @@ import com.example.footballapp.presentation.chempinship.navigation.NavigationScr
 import com.example.footballapp.utils.baseui.BaseTeamDetailWindow
 
 @Composable
-fun TeamDetailChampionsLeagueWindow(
+fun TeamDetailPrimeiraWindow(
     navController: NavController
 ) {
-    val viewModel: TeamDetailChampionsLeagueViewModel = hiltViewModel()
+    val viewModel: TeamDetailPrimeiraViewModel = hiltViewModel()
 
     BaseTeamDetailWindow(
         viewModel = viewModel,

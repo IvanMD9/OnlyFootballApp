@@ -18,7 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.footballapp.presentation.chempinship.detail_team.primeira.TeamDetailPrimeiraLigaWindow
+import com.example.footballapp.presentation.chempinship.detail_team.primeira.TeamDetailPrimeiraWindow
 import com.example.footballapp.presentation.chempinship.matches.primeira.MatchesScreenPrimeiraLiga
 import com.example.footballapp.presentation.chempinship.navigation.NavigationScreen
 import com.example.footballapp.presentation.chempinship.scores.primeira.ScoresPrimeiraLigaScreen
@@ -115,7 +115,7 @@ fun MainWindowPrimeiraLiga(
                             TeamsPrimeiraLigaWindow(navController = navController)
                         }
                         composable(route = NavigationScreen.TeamDetailScreen.route + "/{${Const.PRIMIERA_DETAIL}}") {
-                            TeamDetailPrimeiraLigaWindow(navController = navController)
+                            TeamDetailPrimeiraWindow(navController = navController)
                         }
                         composable(route = NavigationScreen.TeamMatchesScreen.route + "/{${Const.PRIMIERA_TEAM_MATCHES}}") {
                             TeamMatchesPrimeiraLigaWindow()
