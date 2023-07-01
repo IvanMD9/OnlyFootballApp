@@ -1,4 +1,4 @@
-package com.example.footballapp.data.model.chempionship.detail_team
+package com.example.footballapp.domain.model.detail_team
 
 data class Squad(
     val dateOfBirth: String,

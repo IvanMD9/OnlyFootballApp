@@ -1,4 +1,4 @@
-package com.example.footballapp.data.model.chempionship.matches
+package com.example.footballapp.domain.model.detail_team
 
 data class Area(
     val code: String,

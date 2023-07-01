@@ -7,7 +7,6 @@ import com.example.footballapp.utils.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-// TODO: Временное решение с передачей репозиторя в конструктор, так делать нельзя!!!
 @HiltViewModel
 class MatchesPremierLeagueInfoViewModel @Inject constructor(
     repositoryFootball: RepositoryChampionshipFootball

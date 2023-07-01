@@ -30,7 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.footballapp.R
-import com.example.footballapp.data.model.chempionship.detail_team.TeamDetailModel
+import com.example.footballapp.domain.model.detail_team.TeamDetailModel
 import com.example.footballapp.presentation.chempinship.detail_team.components.ItemPlayer
 import com.example.footballapp.presentation.chempinship.detail_team.components.ItemTournament
 import com.example.footballapp.utils.AppDimensions

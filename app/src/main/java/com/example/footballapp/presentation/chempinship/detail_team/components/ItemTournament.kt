@@ -18,7 +18,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import coil.size.Size
-import com.example.footballapp.data.model.chempionship.detail_team.RunningCompetition
+import com.example.footballapp.domain.model.detail_team.RunningCompetition
 
 @Composable
 fun ItemTournament(

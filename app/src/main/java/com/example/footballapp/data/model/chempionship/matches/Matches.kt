@@ -1,7 +1,7 @@
 package com.example.footballapp.data.model.chempionship.matches
 
 data class Matches(
-    val area: Area,
+    val area: AreaResponse,
     val awayTeam: AwayTeam,
     val competition: Competition,
     val group: String,

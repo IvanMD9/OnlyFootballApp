@@ -1,6 +1,6 @@
 package com.example.footballapp.domain.use_case.championship
 
-import com.example.footballapp.data.model.chempionship.detail_team.TeamDetailModel
+import com.example.footballapp.domain.model.detail_team.TeamDetailModel
 import com.example.footballapp.domain.repository.RepositoryChampionshipFootball
 import com.example.footballapp.utils.Resource
 import com.example.footballapp.utils.base.BaseUseCase

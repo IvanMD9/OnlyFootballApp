@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.footballapp.data.model.chempionship.detail_team.Squad
+import com.example.footballapp.domain.model.detail_team.Squad
 
 @Composable
 fun ItemPlayer(

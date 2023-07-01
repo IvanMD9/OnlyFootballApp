@@ -1,6 +1,6 @@
 package com.example.footballapp.data.remote
 
-import com.example.footballapp.data.model.chempionship.detail_team.TeamDetailModel
+import com.example.footballapp.data.model.chempionship.detail_team.DetailTeamResponse
 import com.example.footballapp.data.model.chempionship.matches.MatchesModel
 import com.example.footballapp.data.model.chempionship.matches_team.TeamMatchesModel
 import com.example.footballapp.data.model.chempionship.scores.ScoresModel
@@ -39,7 +39,7 @@ interface FootballApi {
     @GET("teams/{detail_team}")
     suspend fun teamDetailInfo(
         @Path("detail_team") detail : String
-    ) : TeamDetailModel
+    ) : DetailTeamResponse
 
     @GET("teams/{team_matches}/matches")
     suspend fun teamMatchesInfo(
