@@ -22,6 +22,9 @@ import com.example.footballapp.data.model.chempionship.matches.RegularTimeRespon
 import com.example.footballapp.data.model.chempionship.matches.ResultSetResponse
 import com.example.footballapp.data.model.chempionship.matches.ScoreResponse
 import com.example.footballapp.data.model.chempionship.matches.SeasonResponse
+import com.example.footballapp.data.model.chempionship.matches_team.FiltersTeamMatchesResponse
+import com.example.footballapp.data.model.chempionship.matches_team.ResultSetTeamMatchesResponse
+import com.example.footballapp.data.model.chempionship.matches_team.TeamMatchesResponse
 import com.example.footballapp.domain.model.detail_team.AreaModel
 import com.example.footballapp.domain.model.detail_team.TeamDetailModel
 import com.example.footballapp.domain.model.detail_team.Coach
@@ -39,6 +42,9 @@ import com.example.footballapp.domain.model.matches.ScoreModel
 import com.example.footballapp.domain.model.matches.SeasonModel
 import com.example.footballapp.domain.model.matches.TeamModel
 import com.example.footballapp.domain.model.matches.TimeModel
+import com.example.footballapp.domain.model.team_matches.FiltersTeamMatchesModel
+import com.example.footballapp.domain.model.team_matches.ResultSetTeamMatchesModel
+import com.example.footballapp.domain.model.team_matches.TeamMatchesModel
 
 // TODO: Детальный экран команды
 fun DetailTeamResponse.toDomainTeamDetail(): TeamDetailModel = TeamDetailModel(
@@ -220,4 +226,31 @@ fun ResultSetResponse.toDomain() : ResultSetModel = ResultSetModel(
     first = first,
     last = last,
     played = played,
+)
+
+// TODO: Экран всех матчей отдельной команды
+
+fun TeamMatchesResponse.toDomain() : TeamMatchesModel = TeamMatchesModel(
+    filters = filters.toDomain(),
+    matches = matches.map { matches ->
+        matches.toDomain()
+    },
+    resultSet = resultSet.toDomain(),
+)
+
+fun FiltersTeamMatchesResponse.toDomain() : FiltersTeamMatchesModel = FiltersTeamMatchesModel(
+    competitions = competitions,
+    limit = limit,
+    permission = permission,
+)
+
+fun ResultSetTeamMatchesResponse.toDomain() : ResultSetTeamMatchesModel = ResultSetTeamMatchesModel(
+    competitions = competitions,
+    count = count,
+    draws = draws,
+    first = first,
+    last = last,
+    losses = losses,
+    played = played,
+    wins = wins,
 )

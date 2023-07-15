@@ -1,6 +1,6 @@
-package com.example.footballapp.data.model.chempionship.matches_team
+package com.example.footballapp.domain.model.team_matches
 
-data class ResultSet(
+data class ResultSetTeamMatchesModel(
     val competitions: String,
     val count: Int,
     val draws: Int,
