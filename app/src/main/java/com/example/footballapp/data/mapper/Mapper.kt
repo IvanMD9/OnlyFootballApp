@@ -1,8 +1,8 @@
 package com.example.footballapp.data.mapper
 
-import com.example.footballapp.data.model.chempionship.detail_team.DetailTeamResponse
 import com.example.footballapp.data.model.chempionship.detail_team.CoachResponse
 import com.example.footballapp.data.model.chempionship.detail_team.ContractResponse
+import com.example.footballapp.data.model.chempionship.detail_team.DetailTeamResponse
 import com.example.footballapp.data.model.chempionship.detail_team.RunningCompetitionResponse
 import com.example.footballapp.data.model.chempionship.detail_team.SquadResponse
 import com.example.footballapp.data.model.chempionship.matches.AreaResponse
@@ -33,12 +33,13 @@ import com.example.footballapp.data.model.chempionship.scores.TeamResponse
 import com.example.footballapp.data.model.chempionship.standing.StandingResponse
 import com.example.footballapp.data.model.chempionship.standing.StandingsResponse
 import com.example.footballapp.data.model.chempionship.standing.TableResponse
+import com.example.footballapp.data.model.chempionship.teams.TeamsResponse
 import com.example.footballapp.domain.model.detail_team.AreaModel
+import com.example.footballapp.domain.model.detail_team.CoachModel
+import com.example.footballapp.domain.model.detail_team.ContractModel
+import com.example.footballapp.domain.model.detail_team.RunningCompetitionModel
+import com.example.footballapp.domain.model.detail_team.SquadModel
 import com.example.footballapp.domain.model.detail_team.TeamDetailModel
-import com.example.footballapp.domain.model.detail_team.Coach
-import com.example.footballapp.domain.model.detail_team.Contract
-import com.example.footballapp.domain.model.detail_team.RunningCompetition
-import com.example.footballapp.domain.model.detail_team.Squad
 import com.example.footballapp.domain.model.matches.CompetitionModel
 import com.example.footballapp.domain.model.matches.FiltersModel
 import com.example.footballapp.domain.model.matches.Matches
@@ -61,12 +62,13 @@ import com.example.footballapp.domain.model.standing.TableModel
 import com.example.footballapp.domain.model.team_matches.FiltersTeamMatchesModel
 import com.example.footballapp.domain.model.team_matches.ResultSetTeamMatchesModel
 import com.example.footballapp.domain.model.team_matches.TeamMatchesModel
+import com.example.footballapp.domain.model.teams.TeamsModel
 
 // TODO: Детальный экран команды
-fun DetailTeamResponse.toDomainTeamDetail(): TeamDetailModel = TeamDetailModel(
+fun DetailTeamResponse.toDomain(): TeamDetailModel = TeamDetailModel(
     address = address,
     area = area.toDomain(),
-    clubColors = clubColors,
+    clubColors = clubColors.orEmpty(),
     coach = coach.toDomain(),
     crest = crest,
     founded = founded,
@@ -83,7 +85,7 @@ fun DetailTeamResponse.toDomainTeamDetail(): TeamDetailModel = TeamDetailModel(
     staff = emptyList(),
     tla = tla,
     venue = venue,
-    website = website,
+    website = website.orEmpty(),
 )
 
 fun AreaResponse.toDomain(): AreaModel = AreaModel(
@@ -93,7 +95,7 @@ fun AreaResponse.toDomain(): AreaModel = AreaModel(
     name = name,
 )
 
-fun CoachResponse?.toDomain(): Coach = Coach(
+fun CoachResponse?.toDomain(): CoachModel = CoachModel(
     contract = this?.contract.toDomain(),
     dateOfBirth = this?.dateOfBirth ?: "",
     firstName = this?.firstName ?: "",
@@ -103,12 +105,12 @@ fun CoachResponse?.toDomain(): Coach = Coach(
     nationality = this?.nationality ?: "",
 )
 
-fun ContractResponse?.toDomain(): Contract = Contract(
+fun ContractResponse?.toDomain(): ContractModel = ContractModel(
     start = this?.start.toString(),
     until = this?.until.toString(),
 )
 
-fun RunningCompetitionResponse.toDomain(): RunningCompetition = RunningCompetition(
+fun RunningCompetitionResponse.toDomain(): RunningCompetitionModel = RunningCompetitionModel(
     code = code,
     emblem = emblem.orEmpty(),
     id = id,
@@ -116,7 +118,7 @@ fun RunningCompetitionResponse.toDomain(): RunningCompetition = RunningCompetiti
     type = type,
 )
 
-fun SquadResponse.toDomain(): Squad = Squad(
+fun SquadResponse.toDomain(): SquadModel = SquadModel(
     dateOfBirth = dateOfBirth,
     id = id,
     name = name,
@@ -355,4 +357,16 @@ fun TableResponse.toDomain() : TableModel = TableModel(
     position = position,
     team = team.toDomain(),
     won = won
+)
+
+// TODO: Экран со списком клубов
+
+fun TeamsResponse.toDomain() : TeamsModel = TeamsModel(
+    competition = competition.toDomain(),
+    count = count,
+    filters = filters.toDomain(),
+    season = season.toDomain(),
+    teams = teams.map { teams ->
+        teams.toDomain()
+    }
 )

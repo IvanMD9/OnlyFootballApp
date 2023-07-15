@@ -5,7 +5,7 @@ import com.example.footballapp.data.model.chempionship.matches.MatchesModelRespo
 import com.example.footballapp.data.model.chempionship.matches_team.TeamMatchesResponse
 import com.example.footballapp.data.model.chempionship.scores.ScorersResponse
 import com.example.footballapp.data.model.chempionship.standing.StandingsResponse
-import com.example.footballapp.data.model.chempionship.teams.TeamsModel
+import com.example.footballapp.data.model.chempionship.teams.TeamsResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -34,7 +34,7 @@ interface FootballApi {
     @GET("competitions/{teams}/teams")
     suspend fun teamsInfo(
         @Path("teams") teams : String
-    ) : TeamsModel
+    ) : TeamsResponse
 
     @GET("teams/{detail_team}")
     suspend fun teamDetailInfo(

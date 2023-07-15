@@ -9,7 +9,7 @@ data class DetailTeamResponse(
     @JsonProperty("area")
     val area: AreaResponse,
     @JsonProperty("clubColors")
-    val clubColors: String,
+    val clubColors: String?,
     @JsonProperty("coach")
     val coach: CoachResponse?,
     @JsonProperty("crest")
@@ -35,5 +35,5 @@ data class DetailTeamResponse(
     @JsonProperty("venue")
     val venue: String,
     @JsonProperty("website")
-    val website: String
+    val website: String?
 )

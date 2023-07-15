@@ -1,7 +1,7 @@
-package com.example.footballapp.data.model.chempionship.teams
+package com.example.footballapp.domain.model.detail_team
 
-data class Coach(
-    val contract: Contract,
+data class CoachModel(
+    val contract: ContractModel,
     val dateOfBirth: String,
     val firstName: String,
     val id: Int,

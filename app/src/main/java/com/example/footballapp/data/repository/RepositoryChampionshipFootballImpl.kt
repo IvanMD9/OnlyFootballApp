@@ -1,14 +1,13 @@
 package com.example.footballapp.data.repository
 
 import com.example.footballapp.data.mapper.toDomain
-import com.example.footballapp.data.mapper.toDomainTeamDetail
-import com.example.footballapp.data.model.chempionship.teams.TeamsModel
 import com.example.footballapp.data.remote.FootballApi
 import com.example.footballapp.domain.model.detail_team.TeamDetailModel
 import com.example.footballapp.domain.model.matches.MatchesModel
 import com.example.footballapp.domain.model.scorers.ScorersModel
 import com.example.footballapp.domain.model.standing.StandingsModel
 import com.example.footballapp.domain.model.team_matches.TeamMatchesModel
+import com.example.footballapp.domain.model.teams.TeamsModel
 import com.example.footballapp.domain.repository.RepositoryChampionshipFootball
 import javax.inject.Inject
 
@@ -35,13 +34,15 @@ class RepositoryChampionshipFootballImpl @Inject constructor(
     }
 
     override suspend fun teamsInfo(teams: String): TeamsModel {
-        return api.teamsInfo(teams)
+        return api
+            .teamsInfo(teams)
+            .toDomain()
     }
 
     override suspend fun teamDetailInfo(detail: String): TeamDetailModel {
         return api
             .teamDetailInfo(detail)
-            .toDomainTeamDetail()
+            .toDomain()
     }
 
     override suspend fun teamMatchesInfo(teamMatches: String): TeamMatchesModel {
