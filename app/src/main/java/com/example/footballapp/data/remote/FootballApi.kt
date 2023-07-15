@@ -4,7 +4,7 @@ import com.example.footballapp.data.model.chempionship.detail_team.DetailTeamRes
 import com.example.footballapp.data.model.chempionship.matches.MatchesModelResponse
 import com.example.footballapp.data.model.chempionship.matches_team.TeamMatchesResponse
 import com.example.footballapp.data.model.chempionship.scores.ScorersResponse
-import com.example.footballapp.data.model.chempionship.standing.StandingsModel
+import com.example.footballapp.data.model.chempionship.standing.StandingsResponse
 import com.example.footballapp.data.model.chempionship.teams.TeamsModel
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -14,12 +14,12 @@ interface FootballApi {
     @GET("competitions/{league}/standings")
     suspend fun standingsInfo(
         @Path("league") league : String
-    ) : StandingsModel
+    ) : StandingsResponse
 
     @GET("competitions/{europe}/standings")
     suspend fun standingsEuropeInfo(
         @Path("europe") europe : String
-    ) : StandingsModel
+    ) : StandingsResponse
 
     @GET("competitions/{scores}/scorers")
     suspend fun scoresInfo(

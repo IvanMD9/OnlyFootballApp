@@ -1,8 +1,8 @@
 package com.example.footballapp.data.model.chempionship.standing
 
-data class Standing(
-    val group: Any,
+data class StandingResponse(
+    val group: Any?,
     val stage: String,
-    val table: List<Table>,
+    val table: List<TableResponse>,
     val type: String
 )

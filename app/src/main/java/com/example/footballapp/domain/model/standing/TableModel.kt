@@ -1,6 +1,8 @@
-package com.example.footballapp.data.model.chempionship.standing
+package com.example.footballapp.domain.model.standing
 
-data class Table(
+import com.example.footballapp.domain.model.matches.TeamModel
+
+data class TableModel(
     val draw: Int,
     val form: String,
     val goalDifference: Int,
@@ -10,6 +12,6 @@ data class Table(
     val playedGames: Int,
     val points: Int,
     val position: Int,
-    val team: Team,
+    val team: TeamModel,
     val won: Int
 )

@@ -2,12 +2,12 @@ package com.example.footballapp.data.repository
 
 import com.example.footballapp.data.mapper.toDomain
 import com.example.footballapp.data.mapper.toDomainTeamDetail
-import com.example.footballapp.data.model.chempionship.standing.StandingsModel
 import com.example.footballapp.data.model.chempionship.teams.TeamsModel
 import com.example.footballapp.data.remote.FootballApi
 import com.example.footballapp.domain.model.detail_team.TeamDetailModel
 import com.example.footballapp.domain.model.matches.MatchesModel
 import com.example.footballapp.domain.model.scorers.ScorersModel
+import com.example.footballapp.domain.model.standing.StandingsModel
 import com.example.footballapp.domain.model.team_matches.TeamMatchesModel
 import com.example.footballapp.domain.repository.RepositoryChampionshipFootball
 import javax.inject.Inject
@@ -17,7 +17,9 @@ class RepositoryChampionshipFootballImpl @Inject constructor(
 ) : RepositoryChampionshipFootball {
 
     override suspend fun standingsInfo(league: String): StandingsModel {
-        return api.standingsInfo(league)
+        return api
+            .standingsInfo(league)
+            .toDomain()
     }
 
     override suspend fun scoresInfo(scores: String): ScorersModel {

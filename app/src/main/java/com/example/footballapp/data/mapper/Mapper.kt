@@ -30,6 +30,9 @@ import com.example.footballapp.data.model.chempionship.scores.PlayerResponse
 import com.example.footballapp.data.model.chempionship.scores.ScorerResponse
 import com.example.footballapp.data.model.chempionship.scores.ScorersResponse
 import com.example.footballapp.data.model.chempionship.scores.TeamResponse
+import com.example.footballapp.data.model.chempionship.standing.StandingResponse
+import com.example.footballapp.data.model.chempionship.standing.StandingsResponse
+import com.example.footballapp.data.model.chempionship.standing.TableResponse
 import com.example.footballapp.domain.model.detail_team.AreaModel
 import com.example.footballapp.domain.model.detail_team.TeamDetailModel
 import com.example.footballapp.domain.model.detail_team.Coach
@@ -52,6 +55,9 @@ import com.example.footballapp.domain.model.scorers.PlayerModel
 import com.example.footballapp.domain.model.scorers.ScorerModel
 import com.example.footballapp.domain.model.scorers.ScorersModel
 import com.example.footballapp.domain.model.scorers.TeamScorersModel
+import com.example.footballapp.domain.model.standing.StandingModel
+import com.example.footballapp.domain.model.standing.StandingsModel
+import com.example.footballapp.domain.model.standing.TableModel
 import com.example.footballapp.domain.model.team_matches.FiltersTeamMatchesModel
 import com.example.footballapp.domain.model.team_matches.ResultSetTeamMatchesModel
 import com.example.footballapp.domain.model.team_matches.TeamMatchesModel
@@ -314,4 +320,39 @@ fun TeamResponse.toDomain() : TeamScorersModel = TeamScorersModel(
     tla = tla,
     venue = venue,
     website = website,
+)
+
+// TODO: Экран турнирной таблицы
+
+fun StandingsResponse.toDomain() : StandingsModel = StandingsModel(
+    area = area.toDomain(),
+    competition = competition.toDomain(),
+    filters = filters.toDomain(),
+    season = season.toDomain(),
+    standings = standings.map { standings ->
+        standings.toDomain()
+    }
+)
+
+fun StandingResponse.toDomain() : StandingModel = StandingModel(
+    group = group,
+    stage = stage,
+    table = table.map { table ->
+        table.toDomain()
+    },
+    type = type
+)
+
+fun TableResponse.toDomain() : TableModel = TableModel(
+    draw = draw,
+    form = form.orEmpty(),
+    goalDifference = goalDifference,
+    goalsAgainst = goalsAgainst,
+    goalsFor = goalsFor,
+    lost = lost,
+    playedGames = playedGames,
+    points = points,
+    position = position,
+    team = team.toDomain(),
+    won = won
 )
