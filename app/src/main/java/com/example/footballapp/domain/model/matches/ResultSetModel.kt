@@ -1,6 +1,6 @@
-package com.example.footballapp.data.model.chempionship.matches
+package com.example.footballapp.domain.model.matches
 
-data class ResultSet(
+data class ResultSetModel(
     val count: Int,
     val first: String,
     val last: String,

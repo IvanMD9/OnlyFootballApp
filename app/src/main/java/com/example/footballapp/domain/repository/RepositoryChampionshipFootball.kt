@@ -1,11 +1,11 @@
 package com.example.footballapp.domain.repository
 
-import com.example.footballapp.data.model.chempionship.matches.MatchesModel
 import com.example.footballapp.data.model.chempionship.matches_team.TeamMatchesModel
 import com.example.footballapp.data.model.chempionship.scores.ScoresModel
 import com.example.footballapp.data.model.chempionship.standing.StandingsModel
 import com.example.footballapp.data.model.chempionship.teams.TeamsModel
 import com.example.footballapp.domain.model.detail_team.TeamDetailModel
+import com.example.footballapp.domain.model.matches.MatchesModel
 
 interface RepositoryChampionshipFootball {
 

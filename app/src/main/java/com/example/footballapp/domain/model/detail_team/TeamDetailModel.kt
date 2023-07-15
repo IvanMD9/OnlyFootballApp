@@ -2,7 +2,7 @@ package com.example.footballapp.domain.model.detail_team
 
 data class TeamDetailModel(
     val address: String,
-    val area: Area,
+    val area: AreaModel,
     val clubColors: String,
     val coach: Coach,
     val crest: String,

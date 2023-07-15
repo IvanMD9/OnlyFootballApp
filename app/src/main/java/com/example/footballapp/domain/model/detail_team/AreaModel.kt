@@ -1,6 +1,6 @@
 package com.example.footballapp.domain.model.detail_team
 
-data class Area(
+data class AreaModel(
     val code: String,
     val flag: Any,
     val id: Int,
