@@ -1,7 +1,15 @@
 package com.example.footballapp.presentation.chempinship.scores.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,12 +24,11 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
-import coil.size.Size
-import com.example.footballapp.data.model.chempionship.scores.Scorer
+import com.example.footballapp.domain.model.scorers.ScorerModel
 
 @Composable
 fun ItemScoresInfo(
-    scorer: Scorer
+    scorer: ScorerModel
 ) {
     val itemScores = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)

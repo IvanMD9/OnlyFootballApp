@@ -1,6 +1,6 @@
-package com.example.footballapp.data.model.chempionship.scores
+package com.example.footballapp.domain.model.scorers
 
-data class Team(
+data class TeamScorersModel(
     val address: String,
     val clubColors: String,
     val crest: String,

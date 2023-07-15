@@ -3,7 +3,7 @@ package com.example.footballapp.data.remote
 import com.example.footballapp.data.model.chempionship.detail_team.DetailTeamResponse
 import com.example.footballapp.data.model.chempionship.matches.MatchesModelResponse
 import com.example.footballapp.data.model.chempionship.matches_team.TeamMatchesResponse
-import com.example.footballapp.data.model.chempionship.scores.ScoresModel
+import com.example.footballapp.data.model.chempionship.scores.ScorersResponse
 import com.example.footballapp.data.model.chempionship.standing.StandingsModel
 import com.example.footballapp.data.model.chempionship.teams.TeamsModel
 import retrofit2.http.GET
@@ -24,7 +24,7 @@ interface FootballApi {
     @GET("competitions/{scores}/scorers")
     suspend fun scoresInfo(
         @Path("scores") scores : String
-    ) : ScoresModel
+    ) : ScorersResponse
 
     @GET("competitions/{matches}/matches")
     suspend fun matchesInfo(

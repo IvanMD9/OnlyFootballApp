@@ -1,6 +1,6 @@
 package com.example.footballapp.data.model.chempionship.scores
 
-data class Player(
+data class PlayerResponse(
     val dateOfBirth: String,
     val firstName: String,
     val id: Int,

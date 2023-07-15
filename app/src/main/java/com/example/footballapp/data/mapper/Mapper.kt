@@ -25,6 +25,11 @@ import com.example.footballapp.data.model.chempionship.matches.SeasonResponse
 import com.example.footballapp.data.model.chempionship.matches_team.FiltersTeamMatchesResponse
 import com.example.footballapp.data.model.chempionship.matches_team.ResultSetTeamMatchesResponse
 import com.example.footballapp.data.model.chempionship.matches_team.TeamMatchesResponse
+import com.example.footballapp.data.model.chempionship.scores.FiltersScorersResponse
+import com.example.footballapp.data.model.chempionship.scores.PlayerResponse
+import com.example.footballapp.data.model.chempionship.scores.ScorerResponse
+import com.example.footballapp.data.model.chempionship.scores.ScorersResponse
+import com.example.footballapp.data.model.chempionship.scores.TeamResponse
 import com.example.footballapp.domain.model.detail_team.AreaModel
 import com.example.footballapp.domain.model.detail_team.TeamDetailModel
 import com.example.footballapp.domain.model.detail_team.Coach
@@ -42,6 +47,11 @@ import com.example.footballapp.domain.model.matches.ScoreModel
 import com.example.footballapp.domain.model.matches.SeasonModel
 import com.example.footballapp.domain.model.matches.TeamModel
 import com.example.footballapp.domain.model.matches.TimeModel
+import com.example.footballapp.domain.model.scorers.FiltersScorersModel
+import com.example.footballapp.domain.model.scorers.PlayerModel
+import com.example.footballapp.domain.model.scorers.ScorerModel
+import com.example.footballapp.domain.model.scorers.ScorersModel
+import com.example.footballapp.domain.model.scorers.TeamScorersModel
 import com.example.footballapp.domain.model.team_matches.FiltersTeamMatchesModel
 import com.example.footballapp.domain.model.team_matches.ResultSetTeamMatchesModel
 import com.example.footballapp.domain.model.team_matches.TeamMatchesModel
@@ -253,4 +263,55 @@ fun ResultSetTeamMatchesResponse.toDomain() : ResultSetTeamMatchesModel = Result
     losses = losses,
     played = played,
     wins = wins,
+)
+
+// TODO: Экран бомбардиров
+
+fun ScorersResponse.toDomain() : ScorersModel = ScorersModel(
+    competition = competition.toDomain(),
+    count = count,
+    filters = filters.toDomain(),
+    scorers = scorers.map { scorers ->
+        scorers.toDomain()
+    },
+    season = season.toDomain(),
+)
+
+fun FiltersScorersResponse.toDomain() : FiltersScorersModel = FiltersScorersModel(
+    limit = limit,
+    season = season,
+)
+
+fun ScorerResponse.toDomain() : ScorerModel = ScorerModel(
+    assists = assists,
+    goals = goals,
+    penalties = penalties,
+    player = player.toDomain(),
+    team = team.toDomain(),
+)
+
+fun PlayerResponse.toDomain() : PlayerModel = PlayerModel(
+    dateOfBirth = dateOfBirth,
+    firstName = firstName,
+    id = id,
+    lastName = lastName,
+    lastUpdated = lastUpdated,
+    name = name,
+    nationality = nationality,
+    position = position,
+    shirtNumber = shirtNumber,
+)
+
+fun TeamResponse.toDomain() : TeamScorersModel = TeamScorersModel(
+    address = address,
+    clubColors = clubColors,
+    crest = crest,
+    founded = founded,
+    id = id,
+    lastUpdated = lastUpdated,
+    name = name,
+    shortName = shortName,
+    tla = tla,
+    venue = venue,
+    website = website,
 )
