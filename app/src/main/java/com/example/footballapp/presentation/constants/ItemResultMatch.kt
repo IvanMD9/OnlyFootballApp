@@ -16,10 +16,10 @@ import androidx.compose.ui.unit.sp
 fun ItemResultMatch(
     goalHome: Int,
     goalAway: Int,
-    goalHomeRegular: Int? = null,
-    goalAwayRegular: Int? = null,
-    goalHomePen: Int? = null,
-    goalAwayPen: Int? = null,
+    goalHomeRegular: Int?,
+    goalAwayRegular: Int?,
+    goalHomePen: Int?,
+    goalAwayPen: Int?,
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         if (goalHomeRegular != null && goalAwayRegular != null) {

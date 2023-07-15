@@ -1,6 +1,6 @@
 package com.example.footballapp.presentation.chempinship.standing.eredivisie
 
-import com.example.footballapp.data.model.chempionship.standing.StandingsModel
+import com.example.footballapp.domain.model.standing.StandingsModel
 import com.example.footballapp.domain.repository.RepositoryChampionshipFootball
 import com.example.footballapp.domain.use_case.championship.StandingsUseCase
 import com.example.footballapp.utils.base.BaseViewModel

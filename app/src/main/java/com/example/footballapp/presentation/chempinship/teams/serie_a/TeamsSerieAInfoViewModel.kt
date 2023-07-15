@@ -1,6 +1,6 @@
 package com.example.footballapp.presentation.chempinship.teams.serie_a
 
-import com.example.footballapp.data.model.chempionship.teams.TeamsModel
+import com.example.footballapp.domain.model.teams.TeamsModel
 import com.example.footballapp.domain.repository.RepositoryChampionshipFootball
 import com.example.footballapp.domain.use_case.championship.TeamsUseCase
 import com.example.footballapp.utils.base.BaseViewModel

@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
-import com.example.footballapp.data.model.chempionship.matches_team.Matches
+import com.example.footballapp.domain.model.matches.Matches
 import com.example.footballapp.presentation.constants.ItemResultMatch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -67,8 +67,12 @@ fun ItemTeamMatches(
                 ItemResultMatch(
                     goalHome = teamMatches.score.fullTime.home,
                     goalAway = teamMatches.score.fullTime.away,
-                    goalHomeRegular = teamMatches.score.regularTime?.home?.plus(teamMatches.score.extraTime.home),
-                    goalAwayRegular = teamMatches.score.regularTime?.away?.plus(teamMatches.score.extraTime.away),
+                    goalHomeRegular = teamMatches.score.regularTime?.home?.plus(
+                        teamMatches.score.extraTime?.home ?: 0
+                    ),
+                    goalAwayRegular = teamMatches.score.regularTime?.away?.plus(
+                        teamMatches.score.extraTime?.away ?: 0
+                    ),
                     goalHomePen = teamMatches.score.penalties?.home,
                     goalAwayPen = teamMatches.score.penalties?.away,
                 )

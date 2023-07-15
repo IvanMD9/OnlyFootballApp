@@ -1,7 +1,15 @@
 package com.example.footballapp.presentation.chempinship.matches.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -16,7 +24,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
-import com.example.footballapp.data.model.chempionship.matches.Matches
+import com.example.footballapp.domain.model.matches.Matches
 import com.example.footballapp.presentation.constants.ItemResultMatch
 
 @Composable
@@ -38,23 +46,33 @@ fun ItemMatch(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            ItemClub(image = match.homeTeam.crest, name = match.homeTeam.shortName)
+            ItemClub(
+                image = match.homeTeam.crest,
+                name = match.homeTeam.shortName
+            )
             ItemResultMatch(
                 goalHome = match.score.fullTime.home,
                 goalAway = match.score.fullTime.away,
-                goalHomeRegular = match.score.regularTime?.home?.plus(match.score.extraTime.home),
-                goalAwayRegular = match.score.regularTime?.away?.plus(match.score.extraTime.away),
+                goalHomeRegular = match.score.regularTime?.home?.plus(
+                    match.score.extraTime?.home ?: 0
+                ),
+                goalAwayRegular = match.score.regularTime?.away?.plus(
+                    match.score.extraTime?.away ?: 0
+                ),
                 goalHomePen = match.score.penalties?.home,
                 goalAwayPen = match.score.penalties?.away,
             )
-            ItemClub(image = match.awayTeam.crest, name = match.awayTeam.shortName)
+            ItemClub(
+                image = match.awayTeam.crest,
+                name = match.awayTeam.shortName
+            )
         }
     }
 }
 
 @Composable
 private fun ItemClub(
-    image: String,
+    image: String?,
     name: String?
 ) {
     val itemClub = rememberAsyncImagePainter(
@@ -76,7 +94,7 @@ private fun ItemClub(
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = name ?: "",
+            text = name.orEmpty(),
             fontSize = 16.sp,
             fontWeight = FontWeight.Medium,
             color = Color.Black,
