@@ -12,4 +12,5 @@
     <string name="app_detail_team_nationality">Национальность:</string>
     <string name="app_detail_team_players">Игроки</string>
     <string name="app_matches_matchday">Тур:</string>
+    <string name="app_scorers_empty">Список пустой</string>
 </resources>
