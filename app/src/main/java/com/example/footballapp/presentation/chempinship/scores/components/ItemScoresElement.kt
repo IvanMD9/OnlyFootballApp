@@ -16,19 +16,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
+import com.example.footballapp.R
 import com.example.footballapp.domain.model.scorers.ScorerModel
+import com.example.footballapp.utils.AppDimensions
 
 @Composable
 fun ItemScoresInfo(
-    scorer: ScorerModel
+    scorer: ScorerModel,
+    modifier: Modifier = Modifier,
 ) {
     val itemScores = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
@@ -37,9 +40,12 @@ fun ItemScoresInfo(
             .build()
     )
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 10.dp, vertical = 4.dp),
+            .padding(
+                horizontal = 10.dp,
+                vertical = dimensionResource(id = R.dimen.vertical_padding_smallest)
+            ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -51,23 +57,25 @@ fun ItemScoresInfo(
                 painter = itemScores,
                 contentDescription = null,
                 modifier = Modifier
-                    .size(40.dp)
+                    .size(
+                        size = dimensionResource(id = R.dimen.icon_size_medium)
+                    )
                     .clip(RoundedCornerShape(10.dp))
             )
             Spacer(modifier = Modifier.width(12.dp))
             Column(horizontalAlignment = Alignment.Start) {
                 Text(
                     text = scorer.player.name,
-                    fontSize = 16.sp,
+                    fontSize = AppDimensions.Text.lineHeightTextS,
                     fontWeight = FontWeight.Medium,
-                    color = Color.Black
+                    color = colorResource(id = R.color.colorBlack),
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = scorer.team.shortName,
-                    fontSize = 16.sp,
+                    fontSize = AppDimensions.Text.lineHeightTextS,
                     fontWeight = FontWeight.Medium,
-                    color = Color.Gray
+                    color = colorResource(id = R.color.colorGray),
                 )
             }
         }
@@ -76,10 +84,10 @@ fun ItemScoresInfo(
             horizontalArrangement = Arrangement.End
         ) {
             Text(
-                text = scorer.goals.toString(),
-                fontSize = 16.sp,
+                text = "${scorer.goals}",
+                fontSize = AppDimensions.Text.lineHeightTextS,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black
+                color = colorResource(id = R.color.colorBlack),
             )
         }
     }
