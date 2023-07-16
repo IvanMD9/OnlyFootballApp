@@ -16,33 +16,39 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
+import com.example.footballapp.R
 import com.example.footballapp.domain.model.matches.Matches
 import com.example.footballapp.presentation.constants.ItemResultMatch
+import com.example.footballapp.utils.AppDimensions
 
 @Composable
 fun ItemMatch(
-    match: Matches
+    match: Matches,
+    modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 12.dp),
         shape = RoundedCornerShape(10.dp),
-        backgroundColor = Color.White,
-        elevation = 8.dp
+        backgroundColor = colorResource(id = R.color.white),
+        elevation = dimensionResource(id = R.dimen.horizontal_padding_small)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 12.dp),
+                .padding(
+                    horizontal = dimensionResource(id = R.dimen.horizontal_padding_medium),
+                    vertical = 12.dp
+                ),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -72,8 +78,9 @@ fun ItemMatch(
 
 @Composable
 private fun ItemClub(
-    image: String?,
-    name: String?
+    image: String,
+    name: String?,
+    modifier: Modifier = Modifier,
 ) {
     val itemClub = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
@@ -82,7 +89,7 @@ private fun ItemClub(
             .build()
     )
     Column(
-        modifier = Modifier.width(115.dp),
+        modifier = modifier.width(115.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -92,12 +99,16 @@ private fun ItemClub(
             modifier = Modifier
                 .size(35.dp)
         )
-        Spacer(modifier = Modifier.height(4.dp))
+        Spacer(
+            modifier = Modifier.height(
+                height = dimensionResource(id = R.dimen.vertical_padding_smallest)
+            )
+        )
         Text(
             text = name.orEmpty(),
-            fontSize = 16.sp,
+            fontSize = AppDimensions.Text.lineHeightTextS,
             fontWeight = FontWeight.Medium,
-            color = Color.Black,
+            color = colorResource(id = R.color.colorBlack),
             maxLines = 1
         )
     }
