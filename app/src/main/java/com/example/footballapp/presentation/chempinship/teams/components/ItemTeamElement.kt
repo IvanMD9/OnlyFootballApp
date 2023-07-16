@@ -13,19 +13,22 @@ import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
+import com.example.footballapp.R
 import com.example.footballapp.domain.model.detail_team.TeamDetailModel
 
 @Composable
 fun ItemTeamInfo(
     team: TeamDetailModel,
-    onClickDetailTeam: () -> Unit
+    onClickDetailTeam: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val itemTeam = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
@@ -34,13 +37,15 @@ fun ItemTeamInfo(
             .build()
     )
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .clickable { onClickDetailTeam() }
+            .clickable(onClick = onClickDetailTeam)
             .height(150.dp)
-            .padding(vertical = 4.dp),
+            .padding(
+                vertical = dimensionResource(id = R.dimen.vertical_padding_smallest)
+            ),
         shape = RoundedCornerShape(12.dp),
-        backgroundColor = Color.White,
+        backgroundColor = colorResource(id = R.color.white),
         elevation = 5.dp
     ) {
         Box(
