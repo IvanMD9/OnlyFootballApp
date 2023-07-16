@@ -76,6 +76,7 @@ fun ItemMatch(
     }
 }
 
+// TODO: Стоит переиспользовать с экраном матчей у команды
 @Composable
 private fun ItemClub(
     image: String,
@@ -96,8 +97,9 @@ private fun ItemClub(
         Image(
             painter = itemClub,
             contentDescription = null,
-            modifier = Modifier
-                .size(35.dp)
+            modifier = Modifier.size(
+                size = dimensionResource(id = R.dimen.icon_size_pre_medium)
+            ),
         )
         Spacer(
             modifier = Modifier.height(

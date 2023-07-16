@@ -2,68 +2,89 @@ package com.example.footballapp.presentation.chempinship.team_matches.components
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
+import com.example.footballapp.R
 import coil.request.ImageRequest
 import com.example.footballapp.domain.model.matches.Matches
 import com.example.footballapp.presentation.constants.ItemResultMatch
+import com.example.footballapp.utils.AppDimensions
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 @Composable
 fun ItemTeamMatches(
-    teamMatches: Matches
+    teamMatches: Matches,
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
-            text = "Тур: ${teamMatches.matchday}",
-            fontSize = 18.sp,
+            text = "${stringResource(id = R.string.app_matches_matchday)} ${teamMatches.matchday}",
+            fontSize = AppDimensions.Text.displayM,
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+            color = colorResource(id = R.color.colorBlack),
         )
         Spacer(modifier = Modifier.height(6.dp))
         Text(
-            text = "Дата матча: ${dateFormatter(date = teamMatches.utcDate)}",
-            fontSize = 16.sp,
+            text = "${stringResource(id = R.string.app_team_matches_date)} ${dateFormatter(date = teamMatches.utcDate)}",
+            fontSize = AppDimensions.Text.lineHeightTextS,
             fontWeight = FontWeight.Medium,
-            color = Color.Black
+            color = colorResource(id = R.color.colorBlack),
         )
         Spacer(modifier = Modifier.height(6.dp))
         Text(
-            text = "Время матча: ${timeFormatter(date = teamMatches.utcDate)}",
-            fontSize = 16.sp,
+            text = "${stringResource(id = R.string.app_team_matches_time)} ${timeFormatter(time = teamMatches.utcDate)}",
+            fontSize = AppDimensions.Text.lineHeightTextS,
             fontWeight = FontWeight.Medium,
-            color = Color.Black
+            color = colorResource(id = R.color.colorBlack),
         )
         Spacer(modifier = Modifier.height(6.dp))
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 12.dp, end = 12.dp, bottom = 10.dp),
+                .padding(
+                    start = 12.dp,
+                    end = 12.dp,
+                    bottom = 10.dp,
+                ),
             shape = RoundedCornerShape(10.dp),
-            backgroundColor = Color.White,
+            backgroundColor = colorResource(id = R.color.white),
             elevation = 8.dp
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 12.dp, vertical = 12.dp),
+                    .padding(
+                        horizontal = 12.dp,
+                        vertical = 12.dp,
+                    ),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                ItemClub(image = teamMatches.homeTeam.crest, name = teamMatches.homeTeam.shortName)
+                ItemClub(
+                    image = teamMatches.homeTeam.crest,
+                    name = teamMatches.homeTeam.shortName,
+                )
                 ItemResultMatch(
                     goalHome = teamMatches.score.fullTime.home,
                     goalAway = teamMatches.score.fullTime.away,
@@ -76,7 +97,10 @@ fun ItemTeamMatches(
                     goalHomePen = teamMatches.score.penalties?.home,
                     goalAwayPen = teamMatches.score.penalties?.away,
                 )
-                ItemClub(image = teamMatches.awayTeam.crest, name = teamMatches.awayTeam.shortName)
+                ItemClub(
+                    image = teamMatches.awayTeam.crest,
+                    name = teamMatches.awayTeam.shortName,
+                )
             }
         }
     }
@@ -100,10 +124,21 @@ private fun ItemClub(
         Image(
             painter = itemClub,
             contentDescription = null,
-            modifier = Modifier.size(35.dp)
+            modifier = Modifier.size(
+                size = dimensionResource(id = R.dimen.icon_size_pre_medium)
+            ),
         )
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(text = name, fontSize = 16.sp, fontWeight = FontWeight.Medium, color = Color.Black)
+        Spacer(
+            modifier = Modifier.height(
+                height = dimensionResource(id = R.dimen.vertical_padding_smallest)
+            ),
+        )
+        Text(
+            text = name,
+            fontSize = AppDimensions.Text.lineHeightTextS,
+            fontWeight = FontWeight.Medium,
+            color = colorResource(id = R.color.colorBlack),
+        )
     }
 }
 
@@ -114,15 +149,19 @@ private fun dateFormatter(
 ): String {
     val initDate: Date? = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(date)
     val formatter = SimpleDateFormat("dd.MM.yyyy")
-    return initDate?.let { formatter.format(it) }.toString()
+    return initDate?.let { dateTime ->
+        formatter.format(dateTime)
+    }.orEmpty()
 }
 
 @SuppressLint("SimpleDateFormat")
 @Composable
 private fun timeFormatter(
-    date: String
+    time: String
 ): String {
-    val initDate: Date? = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(date)
+    val initDate: Date? = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(time)
     val formatter = SimpleDateFormat("HH:mm")
-    return initDate?.let { formatter.format(it) }.toString()
+    return initDate?.let { dateTime ->
+        formatter.format(dateTime)
+    }.orEmpty()
 }

@@ -13,4 +13,6 @@
     <string name="app_detail_team_players">Игроки</string>
     <string name="app_matches_matchday">Тур:</string>
     <string name="app_scorers_empty">Список пустой</string>
+    <string name="app_team_matches_date">Дата матча:</string>
+    <string name="app_team_matches_time">Время матча:</string>
 </resources>
