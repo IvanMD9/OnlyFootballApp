@@ -12,21 +12,24 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import coil.size.Size
+import com.example.footballapp.R
 import com.example.footballapp.domain.model.standing.TableModel
 import com.example.footballapp.presentation.constants.StatisticsItemTextStanding
+import com.example.footballapp.utils.AppDimensions
 
 @Composable
 fun ItemStandingsInfo(
-    table: TableModel
+    table: TableModel,
+    modifier: Modifier = Modifier,
 ) {
     val imageStanding = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
@@ -36,9 +39,12 @@ fun ItemStandingsInfo(
             .build()
     )
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 6.dp, horizontal = 10.dp),
+            .padding(
+                vertical = dimensionResource(id = R.dimen.vertical_padding_pre_small),
+                horizontal = dimensionResource(id = R.dimen.horizontal_padding_pre_medium),
+            ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -49,40 +55,106 @@ fun ItemStandingsInfo(
         ) {
             Text(
                 text = "${table.position}.",
-                fontSize = 16.sp,
-                color = Color.Black
+                fontSize = AppDimensions.Text.lineHeightTextS,
+                color = colorResource(id = R.color.colorBlack),
             )
-            Spacer(modifier = Modifier.width(6.dp))
+            Spacer(
+                modifier = Modifier
+                    .width(
+                        width = dimensionResource(id = R.dimen.horizontal_padding_pre_small)
+                    ),
+            )
             Image(
                 painter = imageStanding,
                 contentDescription = null,
                 modifier = Modifier.size(35.dp)
             )
-            Spacer(modifier = Modifier.width(6.dp))
+            Spacer(
+                modifier = Modifier
+                    .width(
+                        width = dimensionResource(id = R.dimen.horizontal_padding_pre_small)
+                    ),
+            )
             Text(
                 text = table.team.shortName,
-                fontSize = 16.sp,
-                color = Color.Black
+                fontSize = AppDimensions.Text.lineHeightTextS,
+                color = colorResource(id = R.color.colorBlack),
             )
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.weight(2.5f)
         ) {
-            Spacer(modifier = Modifier.width(8.dp))
-            StatisticsItemTextStanding(text = "${table.playedGames}", fontWeight = FontWeight.Light)
-            Spacer(modifier = Modifier.width(8.dp))
-            StatisticsItemTextStanding(text = "${table.won}", fontWeight = FontWeight.Light)
-            Spacer(modifier = Modifier.width(8.dp))
-            StatisticsItemTextStanding(text = "${table.draw}", fontWeight = FontWeight.Light)
-            Spacer(modifier = Modifier.width(8.dp))
-            StatisticsItemTextStanding(text = "${table.lost}", fontWeight = FontWeight.Light)
-            Spacer(modifier = Modifier.width(8.dp))
-            StatisticsItemTextStanding(text = "${table.goalsFor}:${table.goalsAgainst}", fontWeight = FontWeight.Light)
-            Spacer(modifier = Modifier.width(8.dp))
-            StatisticsItemTextStanding(text = "${table.goalDifference}", fontWeight = FontWeight.Light)
-            Spacer(modifier = Modifier.width(8.dp))
-            StatisticsItemTextStanding(text = "${table.points}", fontWeight = FontWeight.Bold)
+            Spacer(
+                modifier = Modifier
+                    .width(
+                        width = dimensionResource(id = R.dimen.horizontal_padding_small)
+                    ),
+            )
+            StatisticsItemTextStanding(
+                text = "${table.playedGames}",
+                fontWeight = FontWeight.Light
+            )
+            Spacer(
+                modifier = Modifier
+                    .width(
+                        width = dimensionResource(id = R.dimen.horizontal_padding_small)
+                    ),
+            )
+            StatisticsItemTextStanding(
+                text = "${table.won}",
+                fontWeight = FontWeight.Light
+            )
+            Spacer(
+                modifier = Modifier
+                    .width(
+                        width = dimensionResource(id = R.dimen.horizontal_padding_small)
+                    ),
+            )
+            StatisticsItemTextStanding(
+                text = "${table.draw}",
+                fontWeight = FontWeight.Light
+            )
+            Spacer(
+                modifier = Modifier
+                    .width(
+                        width = dimensionResource(id = R.dimen.horizontal_padding_small)
+                    ),
+            )
+            StatisticsItemTextStanding(
+                text = "${table.lost}",
+                fontWeight = FontWeight.Light
+            )
+            Spacer(
+                modifier = Modifier
+                    .width(
+                        width = dimensionResource(id = R.dimen.horizontal_padding_small)
+                    ),
+            )
+            StatisticsItemTextStanding(
+                text = "${table.goalsFor}:${table.goalsAgainst}",
+                fontWeight = FontWeight.Light
+            )
+            Spacer(
+                modifier = Modifier
+                    .width(
+                        width = dimensionResource(id = R.dimen.horizontal_padding_small)
+                    ),
+            )
+            StatisticsItemTextStanding(
+                text = "${table.goalDifference}",
+                fontWeight = FontWeight.Light
+            )
+            Spacer(
+                modifier = Modifier
+                    .width(
+                        width = dimensionResource(id = R.dimen.horizontal_padding_small)
+                    ),
+            )
+            StatisticsItemTextStanding(
+                text = "${table.points}",
+                fontWeight = FontWeight.Bold
+            )
         }
     }
 }

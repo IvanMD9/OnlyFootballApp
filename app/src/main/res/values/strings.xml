@@ -15,4 +15,13 @@
     <string name="app_scorers_empty">Список пустой</string>
     <string name="app_team_matches_date">Дата матча:</string>
     <string name="app_team_matches_time">Время матча:</string>
+    <string name="app_standing_count_point">Набранные очки:</string>
+    <string name="app_standing_statistics_club">Клуб</string>
+    <string name="app_standing_statistics_matches">M</string>
+    <string name="app_standing_statistics_win">W</string>
+    <string name="app_standing_statistics_draw">D</string>
+    <string name="app_standing_statistics_lose">L</string>
+    <string name="app_standing_statistics_goals">Goals</string>
+    <string name="app_standing_statistics_difference">+/-</string>
+    <string name="app_standing_statistics_points">P</string>
 </resources>
