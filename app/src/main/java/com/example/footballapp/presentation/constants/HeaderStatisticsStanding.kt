@@ -9,37 +9,48 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.footballapp.R
+import com.example.footballapp.utils.AppDimensions
+
 @Composable
-fun HeaderStatisticsStanding() {
+fun HeaderStatisticsStanding(
+    modifier: Modifier = Modifier,
+) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .background(Color.White)
-            .padding(start = 10.dp, end = 10.dp, top = 8.dp),
+            .background(
+                color = colorResource(id = R.color.white)
+            )
+            .padding(
+                start = dimensionResource(id = R.dimen.horizontal_padding_pre_medium),
+                end = dimensionResource(id = R.dimen.horizontal_padding_pre_medium),
+                top = dimensionResource(id = R.dimen.vertical_padding_small),
+            ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Row(
-            horizontalArrangement = Arrangement.Start, modifier = Modifier
-                .weight(2f)
+            horizontalArrangement = Arrangement.Start,
+            modifier = Modifier.weight(2f)
         ) {
-            TextHeaderStatistics(text = "Клуб")
+            TextHeaderStatistics(text = stringResource(id = R.string.app_standing_statistics_club))
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.weight(2.2f)
         ) {
-            TextHeaderStatistics(text = "M")
-            TextHeaderStatistics(text = "W")
-            TextHeaderStatistics(text = "D")
-            TextHeaderStatistics(text = "L")
-            TextHeaderStatistics(text = "Goals")
-            TextHeaderStatistics(text = "+/-")
-            TextHeaderStatistics(text = "O")
+            TextHeaderStatistics(text = stringResource(id = R.string.app_standing_statistics_matches))
+            TextHeaderStatistics(text = stringResource(id = R.string.app_standing_statistics_win))
+            TextHeaderStatistics(text = stringResource(id = R.string.app_standing_statistics_draw))
+            TextHeaderStatistics(text = stringResource(id = R.string.app_standing_statistics_lose))
+            TextHeaderStatistics(text = stringResource(id = R.string.app_standing_statistics_goals))
+            TextHeaderStatistics(text = stringResource(id = R.string.app_standing_statistics_difference))
+            TextHeaderStatistics(text = stringResource(id = R.string.app_standing_statistics_points))
         }
     }
 }
@@ -50,8 +61,8 @@ private fun TextHeaderStatistics(
 ) {
     Text(
         text = text,
-        fontSize = 14.sp,
+        fontSize = AppDimensions.Text.textM,
         fontWeight = FontWeight.Medium,
-        color = Color.Gray
+        color = colorResource(id = R.color.colorGray)
     )
 }

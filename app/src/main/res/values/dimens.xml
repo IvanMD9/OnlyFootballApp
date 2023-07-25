@@ -4,12 +4,16 @@
     <dimen name="default_padding">8dp</dimen>
 
     <dimen name="horizontal_padding_smallest">4dp</dimen>
+    <dimen name="horizontal_padding_pre_small">6dp</dimen>
     <dimen name="horizontal_padding_small">8dp</dimen>
+    <dimen name="horizontal_padding_pre_medium">10dp</dimen>
     <dimen name="horizontal_padding_medium">16dp</dimen>
     <dimen name="horizontal_padding_large">20dp</dimen>
 
     <dimen name="vertical_padding_smallest">4dp</dimen>
+    <dimen name="vertical_padding_pre_small">6dp</dimen>
     <dimen name="vertical_padding_small">8dp</dimen>
+    <dimen name="vertical_padding_pre_medium">10dp</dimen>
     <dimen name="vertical_padding_medium">16dp</dimen>
     <dimen name="vertical_padding_large">20dp</dimen>
 
