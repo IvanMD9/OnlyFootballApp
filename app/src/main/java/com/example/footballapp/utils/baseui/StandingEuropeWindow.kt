@@ -3,11 +3,13 @@ package com.example.footballapp.utils.baseui
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -15,15 +17,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import com.example.footballapp.R
 import com.example.footballapp.domain.model.standing.StandingsModel
 import com.example.footballapp.presentation.chempinship.standing.components.ItemStandingsInfo
 import com.example.footballapp.presentation.constants.HeaderStatisticsStanding
+import com.example.footballapp.utils.AppDimensions
 import com.example.footballapp.utils.base.BaseViewModel
 
 @ExperimentalFoundationApi
 @Composable
-inline fun <reified ViewModel : BaseViewModel<StandingsModel>> BaseStandingWindow(
+inline fun <reified ViewModel : BaseViewModel<StandingsModel>> BaseStandingEuropeWindow(
     viewModel: ViewModel,
     modifier: Modifier = Modifier,
 ) {
@@ -39,8 +44,17 @@ inline fun <reified ViewModel : BaseViewModel<StandingsModel>> BaseStandingWindo
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            grouped?.forEach { (_, clubList) ->
+            grouped?.forEach { (group, clubList) ->
                 stickyHeader {
+                    Text(
+                        text = "$group",
+                        color = colorResource(id = R.color.colorBlack),
+                        fontSize = AppDimensions.Text.displayM,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+
+                    )
                     HeaderStatisticsStanding()
                     Divider(
                         modifier = Modifier.padding(
