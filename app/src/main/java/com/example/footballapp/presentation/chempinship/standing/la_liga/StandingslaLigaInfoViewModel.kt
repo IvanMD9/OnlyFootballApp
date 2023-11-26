@@ -17,8 +17,4 @@ class StandingsLaLigaInfoViewModel @Inject constructor(
     init {
         baseMethod(key = "PD")
     }
-
-    override fun baseMethod(key: String) {
-        super.baseMethod(key)
-    }
 }

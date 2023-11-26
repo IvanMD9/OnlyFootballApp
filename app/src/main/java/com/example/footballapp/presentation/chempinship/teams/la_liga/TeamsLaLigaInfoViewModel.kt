@@ -17,8 +17,4 @@ class TeamsLaLigaInfoViewModel @Inject constructor(
     init {
         baseMethod(key = "PD")
     }
-
-    override fun baseMethod(key: String) {
-        super.baseMethod(key)
-    }
 }

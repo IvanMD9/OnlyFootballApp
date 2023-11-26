@@ -17,8 +17,4 @@ class ScoresPremierLeagueInfoViewModel @Inject constructor(
     init {
         baseMethod(key = "PL")
     }
-
-    override fun baseMethod(key: String) {
-        super.baseMethod(key)
-    }
 }

@@ -17,8 +17,4 @@ class StandingsEredivisieInfoViewModel @Inject constructor(
     init {
         baseMethod(key = "DED")
     }
-
-    override fun baseMethod(key: String) {
-        super.baseMethod(key)
-    }
 }
