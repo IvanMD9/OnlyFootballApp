@@ -60,7 +60,6 @@ fun ItemScoresInfo(
                     .size(
                         size = dimensionResource(id = R.dimen.icon_size_medium)
                     )
-                    .clip(RoundedCornerShape(10.dp))
             )
             Spacer(modifier = Modifier.width(12.dp))
             Column(horizontalAlignment = Alignment.Start) {

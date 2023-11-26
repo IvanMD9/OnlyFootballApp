@@ -1,6 +1,7 @@
 package com.example.footballapp.utils.baseui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -52,7 +53,15 @@ inline fun <reified ViewModel : BaseViewModel<StandingsModel>> BaseStandingEurop
                         fontSize = AppDimensions.Text.displayM,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(
+                                color = colorResource(id = R.color.white)
+                            )
+                            .padding(
+                                vertical = dimensionResource(id = R.dimen.vertical_padding_pre_small),
+                                horizontal = dimensionResource(id = R.dimen.horizontal_padding_pre_medium),
+                            )
 
                     )
                     HeaderStatisticsStanding()

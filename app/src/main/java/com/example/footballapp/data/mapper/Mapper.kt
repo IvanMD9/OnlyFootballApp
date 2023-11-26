@@ -119,7 +119,7 @@ fun RunningCompetitionResponse.toDomain(): RunningCompetitionModel = RunningComp
 )
 
 fun SquadResponse.toDomain(): SquadModel = SquadModel(
-    dateOfBirth = dateOfBirth,
+    dateOfBirth = dateOfBirth.orEmpty(),
     id = id,
     name = name,
     nationality = nationality,
@@ -170,19 +170,19 @@ fun MatchesResponse.toDomain(): Matches = Matches(
 )
 
 fun AwayTeamResponse.toDomain() : TeamModel = TeamModel(
-    crest = crest,
+    crest = crest.orEmpty(),
     id = id,
-    name = name,
-    shortName = shortName,
-    tla = tla,
+    name = name.orEmpty(),
+    shortName = shortName.orEmpty(),
+    tla = tla.orEmpty(),
 )
 
 fun HomeTeamResponse.toDomain() : TeamModel = TeamModel(
-    crest = crest,
+    crest = crest.orEmpty(),
     id = id,
-    name = name,
-    shortName = shortName,
-    tla = tla,
+    name = name.orEmpty(),
+    shortName = shortName.orEmpty(),
+    tla = tla.orEmpty(),
 )
 
 fun OddsResponse.toDomain() : OddsModel = OddsModel(
@@ -192,7 +192,7 @@ fun OddsResponse.toDomain() : OddsModel = OddsModel(
 fun RefereeResponse.toDomain() : RefereeModel = RefereeModel(
     id = id,
     name = name,
-    nationality = nationality,
+    nationality = nationality.orEmpty(),
     type = type,
 )
 
@@ -306,13 +306,13 @@ fun PlayerResponse.toDomain() : PlayerModel = PlayerModel(
     lastUpdated = lastUpdated,
     name = name,
     nationality = nationality,
-    position = position,
-    shirtNumber = shirtNumber,
+    position = position.orEmpty(),
+    shirtNumber = shirtNumber.toString(),
 )
 
 fun TeamResponse.toDomain() : TeamScorersModel = TeamScorersModel(
     address = address,
-    clubColors = clubColors,
+    clubColors = clubColors.orEmpty(),
     crest = crest,
     founded = founded,
     id = id,

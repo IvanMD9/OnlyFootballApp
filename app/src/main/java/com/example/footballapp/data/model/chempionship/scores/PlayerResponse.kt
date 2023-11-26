@@ -8,6 +8,6 @@ data class PlayerResponse(
     val lastUpdated: String,
     val name: String,
     val nationality: String,
-    val position: String,
-    val shirtNumber: Any
+    val position: String?,
+    val shirtNumber: Any?
 )

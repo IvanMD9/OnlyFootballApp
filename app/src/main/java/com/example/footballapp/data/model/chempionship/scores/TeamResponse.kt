@@ -2,7 +2,7 @@ package com.example.footballapp.data.model.chempionship.scores
 
 data class TeamResponse(
     val address: String,
-    val clubColors: String,
+    val clubColors: String?,
     val crest: String,
     val founded: Int,
     val id: Int,
