@@ -43,6 +43,7 @@ inline fun <reified ViewModel : BaseViewModel<MatchesModel>> BaseMatchesWindow(
             .padding(bottom = 10.dp),
         contentAlignment = Alignment.Center
     ) {
+        // TODO: Для ЛЧ нужно добавить стадию, инчае некорректно отображаются матчи
         val grouped = state.value.data?.matches?.groupBy { matches ->
             matches.matchday
         }

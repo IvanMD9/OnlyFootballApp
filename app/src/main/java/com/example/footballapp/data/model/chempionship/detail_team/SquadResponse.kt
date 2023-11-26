@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class SquadResponse(
     @JsonProperty("dateOfBirth")
-    val dateOfBirth: String,
+    val dateOfBirth: String?,
     @JsonProperty("id")
     val id: Int,
     @JsonProperty("name")
