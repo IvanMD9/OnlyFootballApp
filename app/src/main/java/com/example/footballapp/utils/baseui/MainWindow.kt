@@ -1,25 +1,24 @@
 package com.example.footballapp.utils.baseui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -35,11 +34,12 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.footballapp.R
 import com.example.footballapp.domain.model.standing.StandingsModel
 import com.example.footballapp.presentation.chempinship.navigation.NavigationScreen
-import com.example.footballapp.presentation.chempinship.standing.ItemTabView
-import com.example.footballapp.presentation.chempinship.standing.components.TabViewInfo
 import com.example.footballapp.utils.AppDimensions
 import com.example.footballapp.utils.base.BaseViewModel
+import com.example.footballapp.utils.baseui.tabrow.ItemTab
+import com.example.footballapp.utils.baseui.tabrow.AppTabRow
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 inline fun <reified ViewModel : BaseViewModel<StandingsModel>> BaseMainWindow(
     viewModel: ViewModel,
@@ -57,9 +57,12 @@ inline fun <reified ViewModel : BaseViewModel<StandingsModel>> BaseMainWindow(
 
     val navController = rememberNavController()
 
-    var selectedTabIndex by remember {
-        mutableIntStateOf(0)
+    val pagerState = rememberPagerState(
+        initialPage = ItemTab.STANDING.page
+    ) {
+        ItemTab.values().size
     }
+
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -111,45 +114,40 @@ inline fun <reified ViewModel : BaseViewModel<StandingsModel>> BaseMainWindow(
             }
         }
     ) { paddingValues ->
-        Column {
-            Spacer(
-                modifier = Modifier
-                    .height(dimensionResource(id = R.dimen.vertical_padding_pre_small))
-                    .padding(paddingValues)
+        Column(
+            modifier = Modifier.padding(paddingValues)
+        ) {
+            AppTabRow(
+                pagerState = pagerState,
+                onTabSelected = {}
             )
-            // TODO: Переработать TabView
-            TabViewInfo(
-                item = listOf(
-                    ItemTabView(title = stringResource(id = R.string.app_main_tab_standing)),
-                    ItemTabView(title = stringResource(id = R.string.app_main_tab_scores)),
-                    ItemTabView(title = stringResource(id = R.string.app_main_tab_teams)),
-                    ItemTabView(title = stringResource(id = R.string.app_main_tab_matches)),
-                ),
-                modifier = Modifier.fillMaxWidth()
-            ) { index ->
-                selectedTabIndex = index
-            }
-            when (selectedTabIndex) {
-                0 -> standingWindow()
-                1 -> scoresWindow()
-                2 -> {
-                    NavHost(
-                        navController = navController,
-                        startDestination = NavigationScreen.TeamsScreen.route
-                    ) {
-                        composable(route = NavigationScreen.TeamsScreen.route) {
-                            teamsWindow(navController)
-                        }
-                        composable(route = NavigationScreen.TeamDetailScreen.route + "/{${keyDetail}}") {
-                            teamDetailingWindow(navController)
-                        }
-                        composable(route = NavigationScreen.TeamMatchesScreen.route + "/{${keyTeamMatches}}") {
-                            teamMatchesWindow()
+
+            HorizontalPager(
+                modifier = Modifier.fillMaxSize(),
+                state = pagerState
+            ) { page ->
+                when (page) {
+                    ItemTab.STANDING.page -> standingWindow()
+                    ItemTab.SCORES.page -> scoresWindow()
+                    ItemTab.TEAMS.page -> {
+                        NavHost(
+                            navController = navController,
+                            startDestination = NavigationScreen.TeamsScreen.route
+                        ) {
+                            composable(route = NavigationScreen.TeamsScreen.route) {
+                                teamsWindow(navController)
+                            }
+                            composable(route = NavigationScreen.TeamDetailScreen.route + "/{${keyDetail}}") {
+                                teamDetailingWindow(navController)
+                            }
+                            composable(route = NavigationScreen.TeamMatchesScreen.route + "/{${keyTeamMatches}}") {
+                                teamMatchesWindow()
+                            }
                         }
                     }
-                }
 
-                3 -> matchesWindow()
+                    ItemTab.MATCHES.page -> matchesWindow()
+                }
             }
         }
     }
