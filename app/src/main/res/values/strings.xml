@@ -24,4 +24,9 @@
     <string name="app_standing_statistics_goals">Goals</string>
     <string name="app_standing_statistics_difference">+/-</string>
     <string name="app_standing_statistics_points">P</string>
+    <string name="app_main_screen_season">Сезон:</string>
+    <string name="app_main_tab_standing">Таблица</string>
+    <string name="app_main_tab_scores">Бомбард.</string>
+    <string name="app_main_tab_teams">Команды</string>
+    <string name="app_main_tab_matches">Матчи</string>
 </resources>

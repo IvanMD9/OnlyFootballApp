@@ -17,8 +17,4 @@ class StandingWorldCupViewModel @Inject constructor(
     init {
         baseMethod(key = "WC")
     }
-
-    override fun baseMethod(key: String) {
-        super.baseMethod(key)
-    }
 }

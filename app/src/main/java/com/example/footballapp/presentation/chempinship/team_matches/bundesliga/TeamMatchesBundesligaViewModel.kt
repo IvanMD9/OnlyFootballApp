@@ -22,8 +22,4 @@ class TeamMatchesBundesligaViewModel @Inject constructor(
             baseMethod(detailId)
         }
     }
-
-    override fun baseMethod(key: String) {
-        super.baseMethod(key)
-    }
 }

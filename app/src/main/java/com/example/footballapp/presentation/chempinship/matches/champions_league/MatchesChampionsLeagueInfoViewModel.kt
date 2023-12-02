@@ -17,8 +17,4 @@ class MatchesChampionsLeagueInfoViewModel @Inject constructor(
     init {
         baseMethod(key = "CL")
     }
-
-    override fun baseMethod(key: String) {
-        super.baseMethod(key)
-    }
 }

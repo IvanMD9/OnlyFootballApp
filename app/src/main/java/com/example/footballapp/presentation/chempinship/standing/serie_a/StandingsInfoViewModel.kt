@@ -17,8 +17,4 @@ class StandingsSerieAInfoViewModel @Inject constructor(
     init {
         baseMethod(key = "SA")
     }
-
-    override fun baseMethod(key: String) {
-        super.baseMethod(key)
-    }
 }

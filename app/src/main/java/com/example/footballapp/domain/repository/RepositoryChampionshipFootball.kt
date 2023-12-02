@@ -10,9 +10,14 @@ import com.example.footballapp.domain.model.teams.TeamsModel
 interface RepositoryChampionshipFootball {
 
     suspend fun standingsInfo(league : String) : StandingsModel
+
     suspend fun scoresInfo(scores : String) : ScorersModel
+
     suspend fun matchesInfo(matches : String) : MatchesModel
+
     suspend fun teamsInfo(teams : String) : TeamsModel
+
     suspend fun teamDetailInfo(detail : String) : TeamDetailModel
+
     suspend fun teamMatchesInfo(teamMatches : String) : TeamMatchesModel
 }
