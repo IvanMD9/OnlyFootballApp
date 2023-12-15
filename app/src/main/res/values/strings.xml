@@ -29,4 +29,6 @@
     <string name="app_main_tab_scores">Бомбард.</string>
     <string name="app_main_tab_teams">Команды</string>
     <string name="app_main_tab_matches">Матчи</string>
+    <string name="app_scores_goals_and_penalties">Голы (Пен.)</string>
+    <string name="app_scores_assists">Передачи</string>
 </resources>
