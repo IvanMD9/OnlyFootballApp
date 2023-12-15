@@ -48,12 +48,20 @@ inline fun <reified ViewModel : BaseViewModel<ScorersModel>> BaseScorersWindow(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(
-                        all = dimensionResource(id = R.dimen.horizontal_padding_large)
+                        vertical = dimensionResource(id = R.dimen.horizontal_padding_medium),
+                        horizontal = dimensionResource(id = R.dimen.horizontal_padding_pre_medium),
                     )
             ) {
                 state.value.data?.let { scorers ->
                     items(scorers.scorers) { result ->
-                        ItemScoresInfo(scorer = result)
+                        ItemScoresInfo(
+                            image = result.team.crest,
+                            namePlayer = result.player.name,
+                            shortNameClub = result.team.shortName,
+                            goals = result.goals,
+                            penalties = result.penalties,
+                            assists = result.assists,
+                        )
                         Divider(Modifier.height(1.dp))
                     }
                 }
