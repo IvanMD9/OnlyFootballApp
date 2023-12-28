@@ -39,7 +39,10 @@ inline fun <reified ViewModel : BaseViewModel<TeamsModel>> BaseTeamsWindow(
             modifier = Modifier.padding(horizontal = 6.dp)
         ) {
             state.value.data?.let { teams ->
-                items(teams.teams) { result ->
+                items(
+                    items = teams.teams,
+                    key = { team -> team.id }
+                ) { result ->
                     ItemTeamInfo(
                         team = result,
                         onClickDetailTeam = {

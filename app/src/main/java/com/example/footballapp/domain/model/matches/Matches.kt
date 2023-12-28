@@ -1,6 +1,7 @@
 package com.example.footballapp.domain.model.matches
 
 import com.example.footballapp.domain.model.detail_team.AreaModel
+import kotlinx.collections.immutable.ImmutableList
 
 data class Matches(
     val area: AreaModel,
@@ -12,7 +13,7 @@ data class Matches(
     val lastUpdated: String,
     val matchday: Int,
     val odds: OddsModel,
-    val referees: List<RefereeModel>,
+    val referees: ImmutableList<RefereeModel>,
     val score: ScoreModel,
     val season: SeasonModel,
     val stage: String,

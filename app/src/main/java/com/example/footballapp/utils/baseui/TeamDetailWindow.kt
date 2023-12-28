@@ -147,7 +147,10 @@ inline fun <reified ViewModel : BaseViewModel<TeamDetailModel>> BaseTeamDetailWi
                     LazyRow(
                         horizontalArrangement = Arrangement.spacedBy(20.dp),
                     ) {
-                        items(detail.runningCompetitions) { tournament ->
+                        items(
+                            items = detail.runningCompetitions,
+                            key = { competition -> competition.id }
+                        ) { tournament ->
                             ItemTournament(tournament = tournament)
                         }
                     }
@@ -193,7 +196,10 @@ inline fun <reified ViewModel : BaseViewModel<TeamDetailModel>> BaseTeamDetailWi
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                 }
-                items(detail.squad) { player ->
+                items(
+                    items = detail.squad,
+                    key = { player -> player.id }
+                ) { player ->
                     ItemPlayer(player = player)
                     Divider()
                 }

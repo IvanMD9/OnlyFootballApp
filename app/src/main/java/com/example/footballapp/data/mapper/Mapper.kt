@@ -63,6 +63,8 @@ import com.example.footballapp.domain.model.team_matches.FiltersTeamMatchesModel
 import com.example.footballapp.domain.model.team_matches.ResultSetTeamMatchesModel
 import com.example.footballapp.domain.model.team_matches.TeamMatchesModel
 import com.example.footballapp.domain.model.teams.TeamsModel
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 
 // TODO: Детальный экран команды
 fun DetailTeamResponse.toDomain(): TeamDetailModel = TeamDetailModel(
@@ -77,12 +79,12 @@ fun DetailTeamResponse.toDomain(): TeamDetailModel = TeamDetailModel(
     name = name,
     runningCompetitions = runningCompetitions.map { tournament ->
         tournament.toDomain()
-    },
+    }.toImmutableList(),
     shortName = shortName,
     squad = squad.map { squad ->
         squad.toDomain()
-    },
-    staff = emptyList(),
+    }.toImmutableList(),
+    staff = persistentListOf(),
     tla = tla,
     venue = venue,
     website = website.orEmpty(),
@@ -97,12 +99,12 @@ fun AreaResponse.toDomain(): AreaModel = AreaModel(
 
 fun CoachResponse?.toDomain(): CoachModel = CoachModel(
     contract = this?.contract.toDomain(),
-    dateOfBirth = this?.dateOfBirth ?: "",
-    firstName = this?.firstName ?: "",
+    dateOfBirth = this?.dateOfBirth.orEmpty(),
+    firstName = this?.firstName.orEmpty(),
     id = this?.id ?: 0,
-    lastName = this?.lastName ?: "",
-    name = this?.name ?: "",
-    nationality = this?.nationality ?: "",
+    lastName = this?.lastName.orEmpty(),
+    name = this?.name.orEmpty(),
+    nationality = this?.nationality.orEmpty(),
 )
 
 fun ContractResponse?.toDomain(): ContractModel = ContractModel(
@@ -133,7 +135,7 @@ fun MatchesModelResponse.toDomain(): MatchesModel = MatchesModel(
     filters = filters.toDomain(),
     matches = matches.map { matches ->
         matches.toDomain()
-    },
+    }.toImmutableList(),
     resultSet = resultSet.toDomain(),
 )
 
@@ -161,7 +163,7 @@ fun MatchesResponse.toDomain(): Matches = Matches(
     odds = odds.toDomain(),
     referees = referees.map { referees ->
         referees.toDomain()
-    },
+    }.toImmutableList(),
     score = score.toDomain(),
     season = season.toDomain(),
     stage = stage,
@@ -169,7 +171,7 @@ fun MatchesResponse.toDomain(): Matches = Matches(
     utcDate = utcDate,
 )
 
-fun AwayTeamResponse.toDomain() : TeamModel = TeamModel(
+fun AwayTeamResponse.toDomain(): TeamModel = TeamModel(
     crest = crest.orEmpty(),
     id = id,
     name = name.orEmpty(),
@@ -177,7 +179,7 @@ fun AwayTeamResponse.toDomain() : TeamModel = TeamModel(
     tla = tla.orEmpty(),
 )
 
-fun HomeTeamResponse.toDomain() : TeamModel = TeamModel(
+fun HomeTeamResponse.toDomain(): TeamModel = TeamModel(
     crest = crest.orEmpty(),
     id = id,
     name = name.orEmpty(),
@@ -185,18 +187,18 @@ fun HomeTeamResponse.toDomain() : TeamModel = TeamModel(
     tla = tla.orEmpty(),
 )
 
-fun OddsResponse.toDomain() : OddsModel = OddsModel(
+fun OddsResponse.toDomain(): OddsModel = OddsModel(
     msg = msg,
 )
 
-fun RefereeResponse.toDomain() : RefereeModel = RefereeModel(
+fun RefereeResponse.toDomain(): RefereeModel = RefereeModel(
     id = id,
     name = name,
     nationality = nationality.orEmpty(),
     type = type,
 )
 
-fun ScoreResponse.toDomain() : ScoreModel = ScoreModel(
+fun ScoreResponse.toDomain(): ScoreModel = ScoreModel(
     duration = duration,
     extraTime = extraTime?.toDomain(),
     fullTime = fullTime.toDomain(),
@@ -206,32 +208,32 @@ fun ScoreResponse.toDomain() : ScoreModel = ScoreModel(
     winner = winner.orEmpty(),
 )
 
-fun ExtraTimeResponse.toDomain() : TimeModel = TimeModel(
+fun ExtraTimeResponse.toDomain(): TimeModel = TimeModel(
     away = away,
     home = home,
 )
 
-fun FullTimeResponse.toDomain() : TimeModel = TimeModel(
+fun FullTimeResponse.toDomain(): TimeModel = TimeModel(
     away = away,
     home = home,
 )
 
-fun HalfTimeResponse.toDomain() : TimeModel = TimeModel(
+fun HalfTimeResponse.toDomain(): TimeModel = TimeModel(
     away = away,
     home = home,
 )
 
-fun PenaltiesResponse.toDomain() : TimeModel = TimeModel(
+fun PenaltiesResponse.toDomain(): TimeModel = TimeModel(
     away = away,
     home = home,
 )
 
-fun RegularTimeResponse.toDomain() : TimeModel = TimeModel(
+fun RegularTimeResponse.toDomain(): TimeModel = TimeModel(
     away = away,
     home = home,
 )
 
-fun SeasonResponse.toDomain() : SeasonModel = SeasonModel(
+fun SeasonResponse.toDomain(): SeasonModel = SeasonModel(
     currentMatchday = currentMatchday,
     endDate = endDate,
     id = id,
@@ -239,7 +241,7 @@ fun SeasonResponse.toDomain() : SeasonModel = SeasonModel(
     winner = winner ?: "",
 )
 
-fun ResultSetResponse.toDomain() : ResultSetModel = ResultSetModel(
+fun ResultSetResponse.toDomain(): ResultSetModel = ResultSetModel(
     count = count,
     first = first,
     last = last,
@@ -248,21 +250,21 @@ fun ResultSetResponse.toDomain() : ResultSetModel = ResultSetModel(
 
 // TODO: Экран всех матчей отдельной команды
 
-fun TeamMatchesResponse.toDomain() : TeamMatchesModel = TeamMatchesModel(
+fun TeamMatchesResponse.toDomain(): TeamMatchesModel = TeamMatchesModel(
     filters = filters.toDomain(),
     matches = matches.map { matches ->
         matches.toDomain()
-    },
+    }.toImmutableList(),
     resultSet = resultSet.toDomain(),
 )
 
-fun FiltersTeamMatchesResponse.toDomain() : FiltersTeamMatchesModel = FiltersTeamMatchesModel(
+fun FiltersTeamMatchesResponse.toDomain(): FiltersTeamMatchesModel = FiltersTeamMatchesModel(
     competitions = competitions,
     limit = limit,
     permission = permission,
 )
 
-fun ResultSetTeamMatchesResponse.toDomain() : ResultSetTeamMatchesModel = ResultSetTeamMatchesModel(
+fun ResultSetTeamMatchesResponse.toDomain(): ResultSetTeamMatchesModel = ResultSetTeamMatchesModel(
     competitions = competitions,
     count = count,
     draws = draws,
@@ -275,22 +277,22 @@ fun ResultSetTeamMatchesResponse.toDomain() : ResultSetTeamMatchesModel = Result
 
 // TODO: Экран бомбардиров
 
-fun ScorersResponse.toDomain() : ScorersModel = ScorersModel(
+fun ScorersResponse.toDomain(): ScorersModel = ScorersModel(
     competition = competition.toDomain(),
     count = count,
     filters = filters.toDomain(),
     scorers = scorers.map { scorers ->
         scorers.toDomain()
-    },
+    }.toImmutableList(),
     season = season.toDomain(),
 )
 
-fun FiltersScorersResponse.toDomain() : FiltersScorersModel = FiltersScorersModel(
+fun FiltersScorersResponse.toDomain(): FiltersScorersModel = FiltersScorersModel(
     limit = limit,
     season = season,
 )
 
-fun ScorerResponse.toDomain() : ScorerModel = ScorerModel(
+fun ScorerResponse.toDomain(): ScorerModel = ScorerModel(
     assists = assists,
     goals = goals,
     penalties = penalties,
@@ -298,7 +300,7 @@ fun ScorerResponse.toDomain() : ScorerModel = ScorerModel(
     team = team.toDomain(),
 )
 
-fun PlayerResponse.toDomain() : PlayerModel = PlayerModel(
+fun PlayerResponse.toDomain(): PlayerModel = PlayerModel(
     dateOfBirth = dateOfBirth,
     firstName = firstName,
     id = id,
@@ -310,7 +312,7 @@ fun PlayerResponse.toDomain() : PlayerModel = PlayerModel(
     shirtNumber = shirtNumber.toString(),
 )
 
-fun TeamResponse.toDomain() : TeamScorersModel = TeamScorersModel(
+fun TeamResponse.toDomain(): TeamScorersModel = TeamScorersModel(
     address = address,
     clubColors = clubColors.orEmpty(),
     crest = crest,
@@ -326,7 +328,7 @@ fun TeamResponse.toDomain() : TeamScorersModel = TeamScorersModel(
 
 // TODO: Экран турнирной таблицы
 
-fun StandingsResponse.toDomain() : StandingsModel = StandingsModel(
+fun StandingsResponse.toDomain(): StandingsModel = StandingsModel(
     area = area.toDomain(),
     competition = competition.toDomain(),
     filters = filters.toDomain(),
@@ -336,7 +338,7 @@ fun StandingsResponse.toDomain() : StandingsModel = StandingsModel(
     }
 )
 
-fun StandingResponse.toDomain() : StandingModel = StandingModel(
+fun StandingResponse.toDomain(): StandingModel = StandingModel(
     group = group,
     stage = stage,
     table = table.map { table ->
@@ -345,7 +347,7 @@ fun StandingResponse.toDomain() : StandingModel = StandingModel(
     type = type
 )
 
-fun TableResponse.toDomain() : TableModel = TableModel(
+fun TableResponse.toDomain(): TableModel = TableModel(
     draw = draw,
     form = form.orEmpty(),
     goalDifference = goalDifference,
@@ -361,12 +363,12 @@ fun TableResponse.toDomain() : TableModel = TableModel(
 
 // TODO: Экран со списком клубов
 
-fun TeamsResponse.toDomain() : TeamsModel = TeamsModel(
+fun TeamsResponse.toDomain(): TeamsModel = TeamsModel(
     competition = competition.toDomain(),
     count = count,
     filters = filters.toDomain(),
     season = season.toDomain(),
     teams = teams.map { teams ->
         teams.toDomain()
-    }
+    }.toImmutableList()
 )
