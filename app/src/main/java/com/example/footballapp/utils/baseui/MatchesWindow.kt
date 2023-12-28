@@ -72,7 +72,10 @@ inline fun <reified ViewModel : BaseViewModel<MatchesModel>> BaseMatchesWindow(
                         )
                     )
                 }
-                items(matches) { result ->
+                items(
+                    items = matches,
+                    key = { match -> match.id }
+                ) { result ->
                     ItemMatch(match = result)
                 }
             }

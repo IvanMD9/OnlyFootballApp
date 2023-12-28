@@ -1,5 +1,9 @@
 package com.example.footballapp.domain.model.detail_team
 
+import androidx.compose.runtime.Stable
+import kotlinx.collections.immutable.ImmutableList
+
+@Stable
 data class TeamDetailModel(
     val address: String,
     val area: AreaModel,
@@ -10,10 +14,10 @@ data class TeamDetailModel(
     val id: Int,
     val lastUpdated: String,
     val name: String,
-    val runningCompetitions: List<RunningCompetitionModel>,
+    val runningCompetitions: ImmutableList<RunningCompetitionModel>,
     val shortName: String,
-    val squad: List<SquadModel>,
-    val staff: List<Any>,
+    val squad: ImmutableList<SquadModel>,
+    val staff: ImmutableList<Any>,
     val tla: String,
     val venue: String,
     val website: String

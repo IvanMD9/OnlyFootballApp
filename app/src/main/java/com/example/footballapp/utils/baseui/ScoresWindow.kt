@@ -53,7 +53,10 @@ inline fun <reified ViewModel : BaseViewModel<ScorersModel>> BaseScorersWindow(
                     )
             ) {
                 state.value.data?.let { scorers ->
-                    items(scorers.scorers) { result ->
+                    items(
+                        items = scorers.scorers,
+                        key = { score -> score.player.id }
+                    ) { result ->
                         ItemScoresInfo(
                             image = result.team.crest,
                             namePlayer = result.player.name,

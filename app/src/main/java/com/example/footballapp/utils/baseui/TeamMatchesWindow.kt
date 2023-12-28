@@ -29,7 +29,10 @@ inline fun <reified ViewModel : BaseViewModel<TeamMatchesModel>> BaseTeamMatches
             modifier = Modifier.fillMaxSize()
         ) {
             state.value.data?.let { teamMatches ->
-                items(teamMatches.matches) { result ->
+                items(
+                    items = teamMatches.matches,
+                    key = { teamMatch -> teamMatch.id }
+                ) { result ->
                     ItemTeamMatches(teamMatches = result)
                 }
             }
