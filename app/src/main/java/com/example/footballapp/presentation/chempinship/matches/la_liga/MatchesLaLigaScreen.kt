@@ -9,5 +9,7 @@ import com.example.footballapp.utils.baseui.BaseMatchesWindow
 @Composable
 fun MatchesScreenLaLiga() {
     val viewModel: MatchesLaLigaInfoViewModel = hiltViewModel()
-    BaseMatchesWindow(viewModel = viewModel)
+    BaseMatchesWindow(viewModel = viewModel,
+        onSelectMatch = viewModel::selectedMatchDialog,
+        onDismiss = viewModel::dismissDialog)
 }

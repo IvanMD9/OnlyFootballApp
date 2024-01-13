@@ -5,6 +5,26 @@ import com.example.footballapp.data.model.chempionship.detail_team.ContractRespo
 import com.example.footballapp.data.model.chempionship.detail_team.DetailTeamResponse
 import com.example.footballapp.data.model.chempionship.detail_team.RunningCompetitionResponse
 import com.example.footballapp.data.model.chempionship.detail_team.SquadResponse
+import com.example.footballapp.data.model.chempionship.detailmatch.Assist
+import com.example.footballapp.data.model.chempionship.detailmatch.AwayTeam
+import com.example.footballapp.data.model.chempionship.detailmatch.Bench
+import com.example.footballapp.data.model.chempionship.detailmatch.Booking
+import com.example.footballapp.data.model.chempionship.detailmatch.Coach
+import com.example.footballapp.data.model.chempionship.detailmatch.DetailMatchResponse
+import com.example.footballapp.data.model.chempionship.detailmatch.Goal
+import com.example.footballapp.data.model.chempionship.detailmatch.HomeTeam
+import com.example.footballapp.data.model.chempionship.detailmatch.Lineup
+import com.example.footballapp.data.model.chempionship.detailmatch.Odds
+import com.example.footballapp.data.model.chempionship.detailmatch.Player
+import com.example.footballapp.data.model.chempionship.detailmatch.PlayerIn
+import com.example.footballapp.data.model.chempionship.detailmatch.PlayerOut
+import com.example.footballapp.data.model.chempionship.detailmatch.Score
+import com.example.footballapp.data.model.chempionship.detailmatch.ScoreResult
+import com.example.footballapp.data.model.chempionship.detailmatch.Scorer
+import com.example.footballapp.data.model.chempionship.detailmatch.Season
+import com.example.footballapp.data.model.chempionship.detailmatch.Statistics
+import com.example.footballapp.data.model.chempionship.detailmatch.Substitution
+import com.example.footballapp.data.model.chempionship.detailmatch.Team
 import com.example.footballapp.data.model.chempionship.matches.AreaResponse
 import com.example.footballapp.data.model.chempionship.matches.AwayTeamResponse
 import com.example.footballapp.data.model.chempionship.matches.CompetitionResponse
@@ -40,6 +60,26 @@ import com.example.footballapp.domain.model.detail_team.ContractModel
 import com.example.footballapp.domain.model.detail_team.RunningCompetitionModel
 import com.example.footballapp.domain.model.detail_team.SquadModel
 import com.example.footballapp.domain.model.detail_team.TeamDetailModel
+import com.example.footballapp.domain.model.detailmatch.AssistModel
+import com.example.footballapp.domain.model.detailmatch.AwayTeamModel
+import com.example.footballapp.domain.model.detailmatch.BenchModel
+import com.example.footballapp.domain.model.detailmatch.BookingModel
+import com.example.footballapp.domain.model.detailmatch.CoachModelDetail
+import com.example.footballapp.domain.model.detailmatch.DetailMatchModel
+import com.example.footballapp.domain.model.detailmatch.GoalModel
+import com.example.footballapp.domain.model.detailmatch.HomeTeamModel
+import com.example.footballapp.domain.model.detailmatch.LineupModel
+import com.example.footballapp.domain.model.detailmatch.OddsModelDetail
+import com.example.footballapp.domain.model.detailmatch.PlayerInModel
+import com.example.footballapp.domain.model.detailmatch.PlayerModelDetail
+import com.example.footballapp.domain.model.detailmatch.PlayerOutModel
+import com.example.footballapp.domain.model.detailmatch.ScoreModelDetail
+import com.example.footballapp.domain.model.detailmatch.ScoreResultModel
+import com.example.footballapp.domain.model.detailmatch.ScorerModelDetail
+import com.example.footballapp.domain.model.detailmatch.SeasonModelDetail
+import com.example.footballapp.domain.model.detailmatch.StatisticsModel
+import com.example.footballapp.domain.model.detailmatch.SubstitutionModel
+import com.example.footballapp.domain.model.detailmatch.TeamModelDetail
 import com.example.footballapp.domain.model.matches.CompetitionModel
 import com.example.footballapp.domain.model.matches.FiltersModel
 import com.example.footballapp.domain.model.matches.Matches
@@ -246,6 +286,196 @@ fun ResultSetResponse.toDomain(): ResultSetModel = ResultSetModel(
     first = first,
     last = last,
     played = played,
+)
+
+// TODO: Детальный диалог отдельного матча
+
+fun DetailMatchResponse.toDomain(): DetailMatchModel = DetailMatchModel(
+    area = area.toDomain(),
+    attendance = attendance,
+    awayTeam = awayTeam.toDomain(),
+    bookings = bookings.map { booking ->
+        booking.toDomain()
+    },
+    competition = competition.toDomain(),
+    goals = goals.map { goal ->
+        goal.toDomain()
+    },
+    group = group,
+    homeTeam = homeTeam.toDomain(),
+    id = id,
+    injuryTime = injuryTime,
+    lastUpdated = lastUpdated,
+    matchday = matchday,
+    minute = minute,
+    odds = odds.toDomain(),
+    penalties = penalties,
+    referees = referees.map { referee ->
+        referee.toDomain()
+    },
+    score = score.toDomain(),
+    season = season.toDomain(),
+    stage = stage,
+    status = status,
+    substitutions = substitutions.map { substitution ->
+        substitution.toDomain()
+    },
+    utcDate = utcDate,
+    venue = venue,
+)
+
+fun ScoreResult.toDomain(): ScoreResultModel = ScoreResultModel(
+    duration = duration,
+    fullTime = fullTime.toDomain(),
+    halfTime = halfTime.toDomain(),
+    winner = winner
+)
+
+fun Season.toDomain(): SeasonModelDetail = SeasonModelDetail(
+    currentMatchday = currentMatchday,
+    endDate = endDate,
+    id = id,
+    stages = stages,
+    startDate = startDate,
+    winner = winner
+)
+
+fun Substitution.toDomain(): SubstitutionModel = SubstitutionModel(
+    minute = minute,
+    playerIn = playerIn.toDomain(),
+    playerOut = playerOut.toDomain(),
+    team = team.toDomain()
+)
+
+fun PlayerIn.toDomain(): PlayerInModel = PlayerInModel(
+    id = id,
+    name = name
+)
+
+fun PlayerOut.toDomain(): PlayerOutModel = PlayerOutModel(
+    id = id,
+    name = name
+)
+
+fun AwayTeam.toDomain(): AwayTeamModel = AwayTeamModel(
+    bench = bench.map { bench ->
+        bench.toDomain()
+    },
+    coach = coach.toDomain(),
+    crest = crest,
+    formation = formation,
+    id = id,
+    leagueRank = leagueRank.toString(),
+    lineup = lineup.map { lineup ->
+        lineup.toDomain()
+    },
+    name = name,
+    shortName = shortName,
+    statistics = statistics.toDomain(),
+    tla = tla
+)
+
+fun HomeTeam.toDomain(): HomeTeamModel = HomeTeamModel(
+    bench = bench.map { bench ->
+        bench.toDomain()
+    },
+    coach = coach.toDomain(),
+    crest = crest,
+    formation = formation,
+    id = id,
+    leagueRank = leagueRank.toString(),
+    lineup = lineup.map { lineup ->
+        lineup.toDomain()
+    },
+    name = name,
+    shortName = shortName,
+    statistics = statistics.toDomain(),
+    tla = tla
+)
+
+fun Bench.toDomain(): BenchModel = BenchModel(
+    id = id,
+    name = name,
+    position = position.orEmpty(),
+    shirtNumber = shirtNumber
+)
+
+fun Coach.toDomain(): CoachModelDetail = CoachModelDetail(
+    id = id,
+    name = name,
+    nationality = nationality
+)
+
+fun Lineup.toDomain(): LineupModel = LineupModel(
+    id = id,
+    name = name,
+    position = position,
+    shirtNumber = shirtNumber
+)
+
+fun Statistics.toDomain(): StatisticsModel = StatisticsModel(
+    ball_possession = ball_possession,
+    corner_kicks = corner_kicks,
+    fouls = fouls,
+    free_kicks = free_kicks,
+    goal_kicks = goal_kicks,
+    offsides = offsides,
+    red_cards = red_cards,
+    saves = saves,
+    shots = shots,
+    shots_off_goal = shots_off_goal,
+    shots_on_goal = shots_on_goal,
+    throw_ins = throw_ins,
+    yellow_cards = yellow_cards,
+    yellow_red_cards = yellow_red_cards
+)
+
+fun Booking.toDomain(): BookingModel = BookingModel(
+    card = card,
+    minute = minute,
+    player = player.toDomain(),
+    team = team.toDomain()
+)
+
+fun Player.toDomain(): PlayerModelDetail = PlayerModelDetail(
+    id = id,
+    name = name
+)
+
+fun Goal.toDomain(): GoalModel = GoalModel(
+    assist = assist.toDomain(),
+    injuryTime = injuryTime.toString(),
+    minute = minute,
+    score = score.toDomain(),
+    scorer = scorer.toDomain(),
+    team = team.toDomain(),
+    type = type
+)
+
+fun Team.toDomain(): TeamModelDetail = TeamModelDetail(
+    id = id,
+    name = name
+)
+
+fun Assist.toDomain(): AssistModel = AssistModel(
+    id = id,
+    name = name
+)
+
+fun Score.toDomain(): ScoreModelDetail = ScoreModelDetail(
+    away = away,
+    home = home
+)
+
+fun Scorer.toDomain(): ScorerModelDetail = ScorerModelDetail(
+    id = id,
+    name = name
+)
+
+fun Odds.toDomain(): OddsModelDetail = OddsModelDetail(
+    awayWin = awayWin,
+    draw = draw,
+    homeWin = homeWin
 )
 
 // TODO: Экран всех матчей отдельной команды

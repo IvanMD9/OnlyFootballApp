@@ -1,6 +1,7 @@
 package com.example.footballapp.presentation.chempinship.matches.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,12 +33,14 @@ import com.example.footballapp.utils.AppDimensions
 @Composable
 fun ItemMatch(
     match: Matches,
+    onClickMatch: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp),
+            .padding(horizontal = 12.dp)
+            .clickable(onClick = onClickMatch),
         shape = RoundedCornerShape(10.dp),
         backgroundColor = colorResource(id = R.color.white),
         elevation = dimensionResource(id = R.dimen.horizontal_padding_small)

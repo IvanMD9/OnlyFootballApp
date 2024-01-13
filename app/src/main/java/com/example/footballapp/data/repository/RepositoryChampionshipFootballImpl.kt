@@ -3,6 +3,7 @@ package com.example.footballapp.data.repository
 import com.example.footballapp.data.mapper.toDomain
 import com.example.footballapp.data.remote.FootballApi
 import com.example.footballapp.domain.model.detail_team.TeamDetailModel
+import com.example.footballapp.domain.model.detailmatch.DetailMatchModel
 import com.example.footballapp.domain.model.matches.MatchesModel
 import com.example.footballapp.domain.model.scorers.ScorersModel
 import com.example.footballapp.domain.model.standing.StandingsModel
@@ -30,6 +31,12 @@ class RepositoryChampionshipFootballImpl @Inject constructor(
     override suspend fun matchesInfo(matches: String): MatchesModel {
         return api
             .matchesInfo(matches)
+            .toDomain()
+    }
+
+    override suspend fun matchDetail(id: String): DetailMatchModel {
+        return api
+            .matchDetail(id)
             .toDomain()
     }
 
