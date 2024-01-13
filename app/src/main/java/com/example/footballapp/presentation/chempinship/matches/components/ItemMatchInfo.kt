@@ -43,7 +43,7 @@ fun ItemMatch(
             .clickable(onClick = onClickMatch),
         shape = RoundedCornerShape(10.dp),
         backgroundColor = colorResource(id = R.color.white),
-        elevation = dimensionResource(id = R.dimen.horizontal_padding_small)
+        elevation = 8.dp
     ) {
         Row(
             modifier = Modifier

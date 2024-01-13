@@ -31,4 +31,6 @@
     <string name="app_main_tab_matches">Матчи</string>
     <string name="app_scores_goals_and_penalties">Голы (Пен.)</string>
     <string name="app_scores_assists">Передачи</string>
+    <string name="app_matches_detail_dialog_referee">Арбитр матча</string>
+    <string name="app_matches_detail_dialog_goals">Голы</string>
 </resources>

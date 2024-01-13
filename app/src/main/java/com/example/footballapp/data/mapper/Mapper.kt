@@ -294,13 +294,13 @@ fun DetailMatchResponse.toDomain(): DetailMatchModel = DetailMatchModel(
     area = area.toDomain(),
     attendance = attendance,
     awayTeam = awayTeam.toDomain(),
-    bookings = bookings.map { booking ->
+    bookings = bookings?.map { booking ->
         booking.toDomain()
-    },
+    } ?: emptyList(),
     competition = competition.toDomain(),
-    goals = goals.map { goal ->
+    goals = goals?.map { goal ->
         goal.toDomain()
-    },
+    } ?: emptyList(),
     group = group,
     homeTeam = homeTeam.toDomain(),
     id = id,
@@ -309,7 +309,7 @@ fun DetailMatchResponse.toDomain(): DetailMatchModel = DetailMatchModel(
     matchday = matchday,
     minute = minute,
     odds = odds.toDomain(),
-    penalties = penalties,
+    penalties = penalties ?: emptyList(),
     referees = referees.map { referee ->
         referee.toDomain()
     },
@@ -317,9 +317,9 @@ fun DetailMatchResponse.toDomain(): DetailMatchModel = DetailMatchModel(
     season = season.toDomain(),
     stage = stage,
     status = status,
-    substitutions = substitutions.map { substitution ->
+    substitutions = substitutions?.map { substitution ->
         substitution.toDomain()
-    },
+    } ?: emptyList(),
     utcDate = utcDate,
     venue = venue,
 )
@@ -335,7 +335,7 @@ fun Season.toDomain(): SeasonModelDetail = SeasonModelDetail(
     currentMatchday = currentMatchday,
     endDate = endDate,
     id = id,
-    stages = stages,
+    stages = stages ?: emptyList(),
     startDate = startDate,
     winner = winner
 )
@@ -358,38 +358,38 @@ fun PlayerOut.toDomain(): PlayerOutModel = PlayerOutModel(
 )
 
 fun AwayTeam.toDomain(): AwayTeamModel = AwayTeamModel(
-    bench = bench.map { bench ->
+    bench = bench?.map { bench ->
         bench.toDomain()
-    },
-    coach = coach.toDomain(),
+    } ?: emptyList(),
+    coach = coach?.toDomain(),
     crest = crest,
-    formation = formation,
+    formation = formation.orEmpty(),
     id = id,
     leagueRank = leagueRank.toString(),
-    lineup = lineup.map { lineup ->
+    lineup = lineup?.map { lineup ->
         lineup.toDomain()
-    },
+    } ?: emptyList(),
     name = name,
     shortName = shortName,
-    statistics = statistics.toDomain(),
+    statistics = statistics?.toDomain(),
     tla = tla
 )
 
 fun HomeTeam.toDomain(): HomeTeamModel = HomeTeamModel(
-    bench = bench.map { bench ->
+    bench = bench?.map { bench ->
         bench.toDomain()
-    },
-    coach = coach.toDomain(),
+    } ?: emptyList(),
+    coach = coach?.toDomain(),
     crest = crest,
-    formation = formation,
+    formation = formation.orEmpty(),
     id = id,
     leagueRank = leagueRank.toString(),
-    lineup = lineup.map { lineup ->
+    lineup = lineup?.map { lineup ->
         lineup.toDomain()
-    },
+    } ?: emptyList(),
     name = name,
     shortName = shortName,
-    statistics = statistics.toDomain(),
+    statistics = statistics?.toDomain(),
     tla = tla
 )
 

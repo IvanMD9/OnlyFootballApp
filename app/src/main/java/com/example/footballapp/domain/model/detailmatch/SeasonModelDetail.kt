@@ -6,5 +6,5 @@ data class SeasonModelDetail(
     val id: Int,
     val stages: List<String>,
     val startDate: String,
-    val winner: Any
+    val winner: Any?
 )

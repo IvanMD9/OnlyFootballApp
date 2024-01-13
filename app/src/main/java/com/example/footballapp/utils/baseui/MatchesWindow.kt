@@ -14,12 +14,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
@@ -32,6 +35,7 @@ import androidx.compose.ui.window.Dialog
 import com.example.footballapp.R
 import com.example.footballapp.domain.model.detailmatch.DetailMatchModel
 import com.example.footballapp.presentation.chempinship.matches.components.ItemMatch
+import com.example.footballapp.presentation.chempinship.matches.components.MatchDetailDialog
 import com.example.footballapp.utils.AppDimensions
 import com.example.footballapp.utils.base.BaseMatchesViewModel
 
@@ -106,34 +110,6 @@ inline fun <reified ViewModel : BaseMatchesViewModel> BaseMatchesWindow(
                 modifier = Modifier.align(Alignment.Center),
                 color = colorResource(id = R.color.colorBlack),
             )
-        }
-    }
-}
-
-@Composable
-fun MatchDetailDialog(
-    match: DetailMatchModel?,
-    onDismiss: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Dialog(onDismissRequest = onDismiss) {
-        match?.let {
-            Column(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceAround
-                ) {
-                    Text(text = match.homeTeam.name, fontSize = 18.sp, color = Color.Black)
-                    Text(text = match.venue, fontSize = 14.sp, color = Color.Gray)
-                    Text(text = match.awayTeam.name, fontSize = 18.sp, color = Color.Black)
-                }
-            }
         }
     }
 }

@@ -11,7 +11,7 @@ data class DetailMatchModel(
     val bookings: List<BookingModel>,
     val competition: CompetitionModel,
     val goals: List<GoalModel>,
-    val group: Any,
+    val group: Any?,
     val homeTeam: HomeTeamModel,
     val id: Int,
     val injuryTime: Int,
