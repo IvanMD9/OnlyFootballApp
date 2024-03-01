@@ -7,7 +7,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.footballapp.presentation.chempinship.start_screen.europe_chempionship.AllEuropeChampionshipWindow
 import com.example.footballapp.presentation.chempinship.start_screen.europe_tournament.AllEuropeTournamentWindow
-import com.example.footballapp.presentation.chempinship.start_screen.world_cup.CurrentWorldCupWindow
 
 @ExperimentalFoundationApi
 @Composable
@@ -23,9 +22,6 @@ fun NavHostDrawer(
         }
         composable(route = NavigationDrawerScreen.EuropeTournamentScreen.route) {
             AllEuropeTournamentWindow()
-        }
-        composable(route = NavigationDrawerScreen.WorldCupScreen.route) {
-            CurrentWorldCupWindow()
         }
     }
 }

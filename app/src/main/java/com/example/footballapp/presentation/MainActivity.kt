@@ -33,7 +33,6 @@ class MainActivity : ComponentActivity() {
                 val navigationItems = listOf(
                     NavigationDrawerScreen.ChampionshipScreen,
                     NavigationDrawerScreen.EuropeTournamentScreen,
-                    NavigationDrawerScreen.WorldCupScreen
                 )
                 Scaffold(
                     scaffoldState = scaffoldState,

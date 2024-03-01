@@ -8,27 +8,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.footballapp.R
 import com.example.footballapp.presentation.chempinship.start_screen.CardChampionship
-import com.example.footballapp.presentation.chempinship.start_screen.CardTournamentModel
 
 @ExperimentalFoundationApi
 @Composable
 fun ChampionshipsWindow(navController: NavController) {
-    var selectedIndex by remember { mutableStateOf(CardTournamentModel()) }
-    val listCard: List<CardTournamentModel> = listOf(
-        CardTournamentModel(id = 1, image = R.drawable.france),
-        CardTournamentModel(id = 2, image = R.drawable.italy),
-        CardTournamentModel(id = 3, image = R.drawable.england),
-        CardTournamentModel(id = 4, image = R.drawable.germany),
-        CardTournamentModel(id = 5, image = R.drawable.spain),
-        CardTournamentModel(id = 6, image = R.drawable.portugal),
-        CardTournamentModel(id = 7, image = R.drawable.netherlands)
-    )
     Box(modifier = Modifier.fillMaxSize()) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
@@ -37,22 +25,18 @@ fun ChampionshipsWindow(navController: NavController) {
             contentPadding = PaddingValues(10.dp),
             modifier = Modifier.fillMaxSize()
         ) {
-            items(items = listCard) { item ->
+            items(items = CardTournamentLeague.values()) { item ->
                 CardChampionship(
-                    item = CardTournamentModel(
-                        id = item.id,
-                        image = item.image
-                    ),
+                    image = item.image,
                     onItemClick = {
-                        selectedIndex = item
-                        when (selectedIndex.id) {
-                            1 -> navController.navigate(ScreenChampionship.FranceScreen.route)
-                            2 -> navController.navigate(ScreenChampionship.ItalyScreen.route)
-                            3 -> navController.navigate(ScreenChampionship.EnglandScreen.route)
-                            4 -> navController.navigate(ScreenChampionship.GermanyScreen.route)
-                            5 -> navController.navigate(ScreenChampionship.SpainScreen.route)
-                            6 -> navController.navigate(ScreenChampionship.PortugalScreen.route)
-                            7 -> navController.navigate(ScreenChampionship.NetherlandsScreen.route)
+                        when (item.id) {
+                            CardTournamentLeague.FRANCE.id -> navController.navigate(ScreenChampionship.FranceScreen.route)
+                            CardTournamentLeague.ITALY.id -> navController.navigate(ScreenChampionship.ItalyScreen.route)
+                            CardTournamentLeague.ENGLAND.id -> navController.navigate(ScreenChampionship.EnglandScreen.route)
+                            CardTournamentLeague.GERMANY.id -> navController.navigate(ScreenChampionship.GermanyScreen.route)
+                            CardTournamentLeague.SPAIN.id -> navController.navigate(ScreenChampionship.SpainScreen.route)
+                            CardTournamentLeague.PORTUGAL.id -> navController.navigate(ScreenChampionship.PortugalScreen.route)
+                            CardTournamentLeague.NETHERLANDS.id -> navController.navigate(ScreenChampionship.NetherlandsScreen.route)
                         }
                     }
                 )

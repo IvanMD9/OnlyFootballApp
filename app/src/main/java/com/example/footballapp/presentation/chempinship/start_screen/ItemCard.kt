@@ -2,7 +2,11 @@ package com.example.footballapp.presentation.chempinship.start_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -14,14 +18,15 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun CardChampionship(
-    item: CardTournamentModel,
-    onItemClick: () -> Unit
+    image: Int,
+    onItemClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .height(170.dp)
             .fillMaxWidth()
-            .clickable { onItemClick() },
+            .clickable(onClick = onItemClick),
         shape = RoundedCornerShape(12.dp),
         elevation = 6.dp
     ) {
@@ -30,7 +35,7 @@ fun CardChampionship(
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(id = item.image),
+                painter = painterResource(id = image),
                 contentDescription = null,
                 modifier = Modifier.size(125.dp),
                 contentScale = ContentScale.FillWidth
